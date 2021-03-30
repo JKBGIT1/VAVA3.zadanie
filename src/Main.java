@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +13,9 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/fxmls/HomepageScene.fxml"));
 
-        HomepageController controller = new HomepageController();
+        HomepageController controller = new HomepageController(
+                FXCollections.observableArrayList()
+        );
         fxmlLoader.setController(controller);
 
         Parent root = fxmlLoader.load();

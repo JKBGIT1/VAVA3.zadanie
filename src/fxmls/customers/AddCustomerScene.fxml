@@ -3,8 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -79,57 +78,103 @@
                     </children>
                 </GridPane>
             </top>
-         <center>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowSpan="3">
+            <center>
+                <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
-                        <Label text="All customers: ">
+                        <Label text="First name: ">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="customersTableView" prefHeight="530.0" prefWidth="1329.0">
-                          <columns>
-                            <TableColumn fx:id="firstNameCol" prefWidth="206.0" text="First Name" />
-                            <TableColumn fx:id="lastNameCol" minWidth="0.0" prefWidth="244.0" text="Last name" />
-                              <TableColumn fx:id="identificationNumberCol" minWidth="0.0" prefWidth="281.0" text="Identification number" />
-                              <TableColumn fx:id="reservationCol" minWidth="0.0" prefWidth="220.0" text="Reservation" />
-                              <TableColumn fx:id="currentAccommodationCol" minWidth="0.0" prefWidth="252.0" text="Current Accommodation" />
-                          </columns>
-                        </TableView>
+                        <TextField fx:id="tfFirstName">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#detailCustomerScene" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #1873d3;" text="Detail" textFill="WHITE">
+                        <Label text="Last name: ">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font name="System Bold" size="22.0" />
                            </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#addCustomerScene" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #28a745;" text="Add customer" textFill="WHITE">
+                        </Label>
+                        <TextField fx:id="tfLastName">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font size="18.0" />
                            </font>
-                        </Button>
+                        </TextField>
                      </children>
-                  </HBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets left="65.0" right="60.0" top="20.0" />
-               </BorderPane.margin>
-            </GridPane>
-         </center>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="Identification number: ">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfIdentificationNumber">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #28a745;" text="Create Customer" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                                  <children>
+                                      <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Button>
+                                  </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                              </HBox>
+                     </children>
+                  </GridPane>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets left="65.0" right="60.0" top="20.0" />
+                    </BorderPane.margin>
+                </GridPane>
+            </center>
         </BorderPane>
     </children>
 </GridPane>

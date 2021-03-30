@@ -12,4 +12,52 @@ public class Room {
     private ArrayList<Image> gallery;
     private Date takenFrom;
     private Date takenTo;
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public ArrayList<Image> getGallery() {
+        return gallery;
+    }
+
+    public void setGallery(ArrayList<Image> gallery) {
+        this.gallery = gallery;
+    }
+
+    public Date getTakenFrom() {
+        return takenFrom;
+    }
+
+    public void setTakenFrom(Date takenFrom) {
+        this.takenFrom = takenFrom;
+    }
+
+    public Date getTakenTo() {
+        return takenTo;
+    }
+
+    public void setTakenTo(Date takenTo) {
+        this.takenTo = takenTo;
+    }
 }

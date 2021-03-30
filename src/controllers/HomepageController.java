@@ -6,6 +6,7 @@ import controllers.payments.PaymentsController;
 import controllers.reservations.ReservationsController;
 import controllers.rooms.RoomsController;
 import controllers.services.ServicesController;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import models.Customer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +31,7 @@ public class HomepageController implements Initializable {
     public static final String RESERVATIONS_SCENE = "/fxmls/reservations/ReservationsScene.fxml";
 
     public static final String CUSTOMERS_SCENE = "/fxmls/customers/CustomersScene.fxml";
+    public static final String ADD_CUSTOMER_SCENE = "/fxmls/customers/AddCustomerScene.fxml";
 
     public static final String SERVICES_SCENE = "/fxmls/services/ServicesScene.fxml";
 
@@ -42,8 +45,12 @@ public class HomepageController implements Initializable {
     private String scenePath;
     private Object controller;
 
-    public HomepageController() {
+    private ObservableList<Customer> allCustomers;
 
+    public HomepageController(
+            ObservableList<Customer> allCustomers
+    ) {
+        this.allCustomers = allCustomers;
     }
 
     public String getScenePath() {
@@ -62,6 +69,14 @@ public class HomepageController implements Initializable {
         this.controller = controller;
     }
 
+    public ObservableList<Customer> getAllCustomers() {
+        return allCustomers;
+    }
+
+    public void setAllCustomers(ObservableList<Customer> allCustomers) {
+        this.allCustomers = allCustomers;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // program has to check if scene contains label with id 'currentTime'
@@ -78,43 +93,57 @@ public class HomepageController implements Initializable {
 
     public void homeScene(MouseEvent event) {
         this.setScenePath(HOMEPAGE_SCENE);
-        this.setController(new HomepageController());
+        this.setController(new HomepageController(
+                this.getAllCustomers()
+        ));
         this.switchScene(event);
     }
 
     public void accommodationsScene(MouseEvent event) {
         this.setScenePath(ACCOMMODATIONS_SCENE);
-        this.setController(new AccommodationsController());
+        this.setController(new AccommodationsController(
+                this.getAllCustomers()
+        ));
         this.switchScene(event);
     }
 
     public void reservationsScene(MouseEvent event) {
         this.setScenePath(RESERVATIONS_SCENE);
-        this.setController(new ReservationsController());
+        this.setController(new ReservationsController(
+                this.getAllCustomers()
+        ));
         this.switchScene(event);
     }
 
     public void customersScene(MouseEvent event) {
         this.setScenePath(CUSTOMERS_SCENE);
-        this.setController(new CustomersController());
+        this.setController(new CustomersController(
+                this.getAllCustomers()
+        ));
         this.switchScene(event);
     }
 
     public void servicesScene(MouseEvent event) {
         this.setScenePath(SERVICES_SCENE);
-        this.setController(new ServicesController());
+        this.setController(new ServicesController(
+                this.getAllCustomers()
+        ));
         this.switchScene(event);
     }
 
     public void paymentsScene(MouseEvent event) {
         this.setScenePath(PAYMENTS_SCENE);
-        this.setController(new PaymentsController());
+        this.setController(new PaymentsController(
+                this.getAllCustomers()
+        ));
         this.switchScene(event);
     }
 
     public void roomsScene(MouseEvent event) {
         this.setScenePath(ROOMS_SCENE);
-        this.setController(new RoomsController());
+        this.setController(new RoomsController(
+                this.getAllCustomers()
+        ));
         this.switchScene(event);
     }
 
