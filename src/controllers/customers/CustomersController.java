@@ -47,6 +47,7 @@ public class CustomersController extends HomepageController {
             identificationNumberCol.setCellValueFactory(new PropertyValueFactory<>("identificationNumber"));
 
             // map table columns to customer methods
+            // inspiration https://stackoverflow.com/questions/25204068/how-do-i-point-a-propertyvaluefactory-to-a-value-of-a-map
             reservationCol.setCellValueFactory(
                     data -> new ReadOnlyStringWrapper(data.getValue().getRoomLabelFromReservation())
             );
