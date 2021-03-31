@@ -100,6 +100,9 @@
                            </font>
                         </TextField>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </GridPane.margin>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
@@ -114,6 +117,9 @@
                            </font>
                         </TextField>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </GridPane.margin>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
@@ -128,6 +134,9 @@
                            </font>
                         </TextField>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </GridPane.margin>
                   </VBox>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <columnConstraints>
@@ -140,26 +149,26 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #28a745;" text="Create Customer" textFill="WHITE">
+                              <Button mnemonicParsing="false" onMouseClicked="#createCustomer" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Create Customer" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
                            </children>
                            <GridPane.margin>
-                              <Insets />
+                              <Insets right="50.0" />
                            </GridPane.margin>
                         </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                                   <children>
-                                      <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
+                                      <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Button>
                                   </children>
                            <GridPane.margin>
-                              <Insets />
+                              <Insets left="50.0" />
                            </GridPane.margin>
                               </HBox>
                      </children>

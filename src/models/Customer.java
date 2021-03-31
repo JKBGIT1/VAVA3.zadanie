@@ -1,14 +1,24 @@
 package models;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Customer {
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String identificationNumber;
     private Reservation reservation;
     private Accommodation currentAccommodation;
     private ObservableList<Accommodation> accommodations;
+
+    public Customer(String firstName, String lastName, String identificationNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.identificationNumber = identificationNumber;
+        this.reservation = null;
+        this.currentAccommodation = null;
+        this.accommodations = FXCollections.observableArrayList();
+    }
 
     public String getFirstName() {
         return firstName;
@@ -18,12 +28,12 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getIdentificationNumber() {

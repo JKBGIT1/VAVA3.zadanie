@@ -107,12 +107,12 @@
                   </VBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#detailCustomerScene" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #1873d3;" text="Detail" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#detailCustomerScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #1873d3;" text="Detail" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#addCustomerScene" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #28a745;" text="Add customer" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#addCustomerScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Add customer" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

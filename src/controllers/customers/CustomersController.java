@@ -12,8 +12,11 @@ import models.Customer;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class CustomersController extends HomepageController {
+
+    private static final Logger LOGGER = Logger.getLogger(CustomersController.class.getName());
 
     @FXML
     private TableView<Customer> customersTableView;
@@ -27,10 +30,11 @@ public class CustomersController extends HomepageController {
     }
 
     public void detailCustomerScene(MouseEvent event) {
-
+        LOGGER.info("Switching to DetailCustomer scene");
     }
 
     public void addCustomerScene(MouseEvent event) {
+        LOGGER.info("Switching to AddCustomer scene");
         this.setScenePath(ADD_CUSTOMER_SCENE);
         this.setController(new AddCustomerController(
                 this.getAllCustomers()
@@ -41,6 +45,7 @@ public class CustomersController extends HomepageController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.customersTableView != null) {
+            LOGGER.info("Mapping attributes and methods to customersTableView.");
             // map table columns to customer attributes
             firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -56,6 +61,7 @@ public class CustomersController extends HomepageController {
             );
 
             // display customers in TableView
+            LOGGER.info("Displaying customers in customersTableView.");
             this.customersTableView.setItems(this.getAllCustomers());
         }
     }
