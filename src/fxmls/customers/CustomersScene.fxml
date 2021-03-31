@@ -34,42 +34,37 @@
                         <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <HBox alignment="CENTER" maxHeight="100.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                        <HBox alignment="CENTER" maxHeight="100.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#homeScene" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #663E0A;" text="Home" textFill="WHITE">
+                                <Button mnemonicParsing="false" onMouseClicked="#homeScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Home" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                     <HBox.margin>
-                                        <Insets right="50.0" />
+                                        <Insets />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#accommodationsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Accommodation" textFill="WHITE">
+                                <Button mnemonicParsing="false" onMouseClicked="#accommodationsScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Accommodations" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#reservationsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Reservations" textFill="WHITE">
+                                <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Customers" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Customers" textFill="WHITE">
+                                <Button mnemonicParsing="false" onMouseClicked="#servicesScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Services" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#servicesScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Services" textFill="WHITE">
+                                <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Rooms" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#paymentsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Payments" textFill="WHITE">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Rooms" textFill="WHITE">
+                                <Button mnemonicParsing="false" onMouseClicked="#quit" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #B22222;" text="Quit" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>

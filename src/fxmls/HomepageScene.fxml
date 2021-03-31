@@ -32,42 +32,37 @@
                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                    </rowConstraints>
                    <children>
-                       <HBox alignment="CENTER" maxHeight="100.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                       <HBox alignment="CENTER" maxHeight="100.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#homeScene" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #663E0A;" text="Home" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#homeScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Home" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="50.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#accommodationsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Accommodation" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#accommodationsScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Accommodations" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#reservationsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Reservations" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Customers" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Customers" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#servicesScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Services" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#servicesScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Services" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #663E0A;" text="Rooms" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#paymentsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Payments" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #663E0A;" text="Rooms" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#quit" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #B22222;" text="Quit" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -78,9 +73,8 @@
                </GridPane>
            </top>
          <center>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane hgap="25.0" vgap="25.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -91,77 +85,56 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#accommodationsScene" prefHeight="221.0" prefWidth="319.0" style="-fx-background-color: #A0522D;" text="Accommodation" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#accommodationsScene" prefHeight="325.0" prefWidth="692.0" style="-fx-background-color: #A0522D;" text="Accommodations" textFill="WHITE">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="36.0" />
                            </font>
                         </Button>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets />
                      </GridPane.margin>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#reservationsScene" prefHeight="221.0" prefWidth="319.0" style="-fx-background-color: #A0522D;" text="Reservations" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="304.0" prefWidth="698.0" style="-fx-background-color: #A0522D;" text="Customers" textFill="WHITE">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="36.0" />
                            </font>
                         </Button>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="20.0" top="20.0" />
-                     </GridPane.margin>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
-                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="221.0" prefWidth="319.0" style="-fx-background-color: #A0522D;" text="Customers" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <GridPane.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets />
                      </GridPane.margin>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#servicesScene" prefHeight="221.0" prefWidth="319.0" style="-fx-background-color: #A0522D;" text="Services" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#servicesScene" prefHeight="287.0" prefWidth="671.0" style="-fx-background-color: #A0522D;" text="Services" textFill="WHITE">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="36.0" />
                            </font>
                         </Button>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets />
                      </GridPane.margin>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#paymentsScene" prefHeight="221.0" prefWidth="319.0" style="-fx-background-color: #A0522D;" text="Payments" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="300.0" prefWidth="722.0" style="-fx-background-color: #A0522D;" text="Rooms" textFill="WHITE">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="36.0" />
                            </font>
                         </Button>
                      </children>
                      <GridPane.margin>
-                        <Insets bottom="20.0" top="20.0" />
-                     </GridPane.margin>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="221.0" prefWidth="319.0" style="-fx-background-color: #A0522D;" text="Rooms" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <GridPane.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets />
                      </GridPane.margin>
                   </HBox>
                </children>
+               <BorderPane.margin>
+                  <Insets bottom="25.0" left="65.0" right="65.0" top="25.0" />
+               </BorderPane.margin>
             </GridPane>
          </center>
          <bottom>
