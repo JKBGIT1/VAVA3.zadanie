@@ -1,16 +1,16 @@
 package models;
 
-import javafx.collections.ObservableList;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class Accommodation {
+public class Accommodation implements Serializable {
     private Room room;
     private Date dateFrom;
     private Date dateTo;
     private double price;
     private boolean isPayed;
-    private ObservableList<UsedService> usedServices;
+    private ArrayList<UsedService> usedServices;
 
     public Room getRoom() {
         return room;
@@ -52,11 +52,11 @@ public class Accommodation {
         isPayed = payed;
     }
 
-    public ObservableList<UsedService> getUsedServices() {
+    public ArrayList<UsedService> getUsedServices() {
         return usedServices;
     }
 
-    public void setUsedServices(ObservableList<UsedService> usedServices) {
+    public void setUsedServices(ArrayList<UsedService> usedServices) {
         this.usedServices = usedServices;
     }
 }

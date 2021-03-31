@@ -35,7 +35,7 @@ public class AddCategoryController extends HomepageController {
                 double price = this.convertStringToDouble(priceString);
                 LOGGER.info("Creating room category based on entered data.");
                 // add new room category to all categories observable list
-                Serialization.getInstance().getAllCategories().add(new RoomCategory(
+                Serialization.getInstance().addRoomCategoryAndSerialize(new RoomCategory(
                         categoryName,
                         description,
                         price

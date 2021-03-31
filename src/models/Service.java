@@ -1,6 +1,8 @@
 package models;
 
-public class Service {
+import java.io.Serializable;
+
+public class Service implements Serializable {
     private String description;
     private double price;
 }

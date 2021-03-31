@@ -29,7 +29,7 @@ public class AddCustomerController extends HomepageController {
         } else {
             LOGGER.info("Creating customer based on data in TextFields");
             // Create new customer and add him/her to observable list of all customers in serialization class
-            Serialization.getInstance().getAllCustomers().add(new Customer(
+            Serialization.getInstance().addCustomerAndSerialize(new Customer(
                     firstName,
                     lastName,
                     identificationNumber

@@ -1,15 +1,15 @@
 package models;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Customer {
+public class Customer implements Serializable {
     private String firstName;
     private String lastName;
     private String identificationNumber;
     private Reservation reservation;
     private Accommodation currentAccommodation;
-    private ObservableList<Accommodation> accommodations;
+    private ArrayList<Accommodation> accommodations;
 
     public Customer(String firstName, String lastName, String identificationNumber) {
         this.firstName = firstName;
@@ -17,7 +17,7 @@ public class Customer {
         this.identificationNumber = identificationNumber;
         this.reservation = null;
         this.currentAccommodation = null;
-        this.accommodations = FXCollections.observableArrayList();
+        this.accommodations = new ArrayList<>();
     }
 
     public String getFirstName() {
@@ -84,11 +84,11 @@ public class Customer {
         return this.currentAccommodation.getRoom().getLabel();
     }
 
-    public ObservableList<Accommodation> getAccommodations() {
+    public ArrayList<Accommodation> getAccommodations() {
         return accommodations;
     }
 
-    public void setAccommodations(ObservableList<Accommodation> accommodations) {
+    public void setAccommodations(ArrayList<Accommodation> accommodations) {
         this.accommodations = accommodations;
     }
 }

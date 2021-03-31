@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RoomCategory {
+public class RoomCategory implements Serializable {
     private String categoryName;
     private String description;
     private double price;

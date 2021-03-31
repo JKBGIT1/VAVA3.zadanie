@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Reservation {
+public class Reservation implements Serializable {
     private Date dateFrom;
     private Date dateTo;
     private double price;

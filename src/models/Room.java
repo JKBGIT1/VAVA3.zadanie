@@ -2,10 +2,11 @@ package models;
 
 import javafx.scene.image.Image;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Room {
+public class Room implements Serializable {
     private String label;
     private String note;
     private String category;
