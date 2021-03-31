@@ -42,8 +42,11 @@ public class RoomsController extends HomepageController {
         LOGGER.info("Switching to DisplayRooms scene.");
     }
 
-    public void addRoomScene() {
+    public void addRoomScene(MouseEvent event) {
         LOGGER.info("Switching to AddRoom scene.");
+        this.setScenePath(ADD_ROOM_SCENE);
+        this.setController(new AddRoomController());
+        this.switchScene(event);
     }
 
     public void addCategoryScene(MouseEvent event) {

@@ -15,6 +15,16 @@ public class Room implements Serializable {
     private Date takenTo;
     private boolean isFree;
 
+    public Room(String label, String note, String category, ArrayList<Image> gallery) {
+        this.label = label;
+        this.note = note;
+        this.category = category;
+        this.gallery = gallery;
+        this.takenFrom = null;
+        this.takenTo = null;
+        this.isFree = false;
+    }
+
     public String getLabel() {
         return label;
     }

@@ -129,7 +129,10 @@
                                         <Font name="System Bold" size="22.0" />
                                     </font>
                                 </Label>
-                        <TextArea fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="taDescription" prefHeight="200.0" prefWidth="200.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font></TextArea>
                             </children>
                             <GridPane.margin>
                                 <Insets left="65.0" right="65.0" />
