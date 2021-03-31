@@ -4,7 +4,6 @@ import controllers.accommodations.AccommodationsController;
 import controllers.customers.CustomersController;
 import controllers.rooms.RoomsController;
 import controllers.services.ServicesController;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,10 +17,13 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import models.Customer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -38,6 +40,7 @@ public class HomepageController implements Initializable {
     public static final String SERVICES_SCENE = "/fxmls/services/ServicesScene.fxml";
 
     public static final String ROOMS_SCENE = "/fxmls/rooms/RoomsScene.fxml";
+    public static final String ADD_CATEGORY_SCENE = "/fxmls/rooms/AddCategoryScene.fxml";
 
     private static final Logger LOGGER = Logger.getLogger(HomepageController.class.getName());
 
@@ -47,13 +50,9 @@ public class HomepageController implements Initializable {
     private String scenePath;
     private Object controller;
 
-    private ObservableList<Customer> allCustomers;
-
-    public HomepageController(
-            ObservableList<Customer> allCustomers
-    ) {
-        this.allCustomers = allCustomers;
-    }
+    /*
+     * Start of getters and setters
+     */
 
     public String getScenePath() {
         return scenePath;
@@ -71,13 +70,9 @@ public class HomepageController implements Initializable {
         this.controller = controller;
     }
 
-    public ObservableList<Customer> getAllCustomers() {
-        return allCustomers;
-    }
-
-    public void setAllCustomers(ObservableList<Customer> allCustomers) {
-        this.allCustomers = allCustomers;
-    }
+    /*
+     * End of getters and setters
+     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -97,45 +92,35 @@ public class HomepageController implements Initializable {
     public void homeScene(MouseEvent event) {
         LOGGER.info("Switching to Homepage scene.");
         this.setScenePath(HOMEPAGE_SCENE);
-        this.setController(new HomepageController(
-                this.getAllCustomers()
-        ));
+        this.setController(new HomepageController());
         this.switchScene(event);
     }
 
     public void accommodationsScene(MouseEvent event) {
         LOGGER.info("Switching to Accommodation scene.");
         this.setScenePath(ACCOMMODATIONS_SCENE);
-        this.setController(new AccommodationsController(
-                this.getAllCustomers()
-        ));
+        this.setController(new AccommodationsController());
         this.switchScene(event);
     }
 
     public void customersScene(MouseEvent event) {
         LOGGER.info("Switching to Customers scene.");
         this.setScenePath(CUSTOMERS_SCENE);
-        this.setController(new CustomersController(
-                this.getAllCustomers()
-        ));
+        this.setController(new CustomersController());
         this.switchScene(event);
     }
 
     public void servicesScene(MouseEvent event) {
         LOGGER.info("Switching to Services scene.");
         this.setScenePath(SERVICES_SCENE);
-        this.setController(new ServicesController(
-                this.getAllCustomers()
-        ));
+        this.setController(new ServicesController());
         this.switchScene(event);
     }
 
     public void roomsScene(MouseEvent event) {
         LOGGER.info("Switching to Rooms scene.");
         this.setScenePath(ROOMS_SCENE);
-        this.setController(new RoomsController(
-                this.getAllCustomers()
-        ));
+        this.setController(new RoomsController());
         this.switchScene(event);
     }
 
@@ -172,7 +157,56 @@ public class HomepageController implements Initializable {
         System.exit(0);
     }
 
-    /**
+    /*
+     * Converting methods
+     */
+
+    // NOTE: This function needs to be used inside try and catch
+    public double convertStringToDouble(String stringNumber) {
+        // Before parse replace commas with dots to prevent error
+        double doubleNumber = Double.parseDouble(stringNumber.replaceAll(",","."));
+
+        // If user didn't use zero as an input then we floor this number on two decimals
+        if (doubleNumber != 0) {
+            doubleNumber = Math.floor(doubleNumber * 100) / 100; // Taken from https://stackoverflow.com/questions/7747469/how-can-i-truncate-a-double-to-only-two-decimal-places-in-java
+        }
+        return doubleNumber;
+    }
+
+    // NOTE: This function needs to be used inside try and catch
+    public String convertDateToString(Date date) {
+        // Inspiration from https://www.javatpoint.com/java-date-to-string
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        return dateFormat.format(date);
+    }
+
+    // NOTE: This function needs to be used inside try and catch
+    public String convertDoubleToString(double price) {
+        return String.valueOf(price);
+    }
+
+    public Date convertStringToDate(String stringDate) {
+        try {
+            // Try to handle more types of date format
+            stringDate = stringDate.replaceAll("/", ".");
+            stringDate = stringDate.replaceAll("-", ".");
+            stringDate = stringDate.replaceAll(",", ".");
+
+            Date date = new SimpleDateFormat("dd.MM.yyyy").parse(stringDate); // Inspiration from https://www.javatpoint.com/java-string-to-date
+            return date;
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+
+    /*
+     * End of Converting methods
+     */
+
+
+    /*
      * Start of PopUps
      */
 

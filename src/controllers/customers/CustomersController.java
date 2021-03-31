@@ -1,8 +1,8 @@
 package controllers.customers;
 
 import controllers.HomepageController;
+import design_patterns.Serialization;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,20 +25,22 @@ public class CustomersController extends HomepageController {
     @FXML
     private TableColumn<Customer, String> reservationCol, currentAccommodationCol;
 
-    public CustomersController(ObservableList<Customer> allCustomers) {
-        super(allCustomers);
-    }
-
     public void detailCustomerScene(MouseEvent event) {
         LOGGER.info("Switching to DetailCustomer scene");
+    }
+
+    public void reservationScene(MouseEvent event) {
+        LOGGER.info("Switching to Reservation scene");
+    }
+
+    public void accommodateScene(MouseEvent event) {
+        LOGGER.info("Switching to Accommodate scene");
     }
 
     public void addCustomerScene(MouseEvent event) {
         LOGGER.info("Switching to AddCustomer scene");
         this.setScenePath(ADD_CUSTOMER_SCENE);
-        this.setController(new AddCustomerController(
-                this.getAllCustomers()
-        ));
+        this.setController(new AddCustomerController());
         this.switchScene(event);
     }
 
@@ -62,7 +64,8 @@ public class CustomersController extends HomepageController {
 
             // display customers in TableView
             LOGGER.info("Displaying customers in customersTableView.");
-            this.customersTableView.setItems(this.getAllCustomers());
+            // Get all customers observable list from Serialization class
+            this.customersTableView.setItems(Serialization.getInstance().getAllCustomers());
         }
     }
 }

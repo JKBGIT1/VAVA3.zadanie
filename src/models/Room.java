@@ -12,6 +12,7 @@ public class Room {
     private ArrayList<Image> gallery;
     private Date takenFrom;
     private Date takenTo;
+    private boolean isFree;
 
     public String getLabel() {
         return label;
@@ -59,5 +60,13 @@ public class Room {
 
     public void setTakenTo(Date takenTo) {
         this.takenTo = takenTo;
+    }
+
+    public boolean isFree() {
+        return isFree;
+    }
+
+    public void setFree(boolean free) {
+        isFree = free;
     }
 }

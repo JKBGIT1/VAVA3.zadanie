@@ -13,9 +13,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/fxmls/HomepageScene.fxml"));
 
-        HomepageController controller = new HomepageController(
-                FXCollections.observableArrayList()
-        );
+        HomepageController controller = new HomepageController();
         fxmlLoader.setController(controller);
 
         Parent root = fxmlLoader.load();
