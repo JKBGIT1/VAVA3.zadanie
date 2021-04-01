@@ -43,6 +43,7 @@ public class HomepageController implements Initializable {
     public static final String ADD_ROOM_SCENE = "/fxmls/rooms/AddRoomScene.fxml";
     public static final String ADD_CATEGORY_SCENE = "/fxmls/rooms/AddCategoryScene.fxml";
     public static final String DISPLAY_ROOMS_SCENE = "/fxmls/rooms/DisplayRoomsScene.fxml";
+    public static final String DETAIL_ROOM_SCENE = "/fxmls/rooms/DetailRoomScene.fxml";
 
     private static final Logger LOGGER = Logger.getLogger(HomepageController.class.getName());
 

@@ -1,13 +1,13 @@
 package controllers.rooms;
 
 import controllers.HomepageController;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import models.Room;
 import models.RoomCategory;
 
@@ -60,7 +60,20 @@ public class DisplayRoomsController extends HomepageController {
         }
     }
 
-    public void roomDetail() {
+    public void detailRoomScene(MouseEvent event) {
+        if (this.roomsTableView.getSelectionModel().getSelectedItem() == null) {
+            LOGGER.info("User didn't select room for detail info.");
+            this.showErrorPopUp(
+                    "Select room",
+                    "You have to select room, which you want to display in detail"
+            );
+        } else {
+            Room selectedRoom = this.roomsTableView.getSelectionModel().getSelectedItem();
 
+            LOGGER.info("Switching to RoomDetail scene.");
+            this.setScenePath(DETAIL_ROOM_SCENE);
+            this.setController(new DetailRoomController(selectedRoom));
+            this.switchScene(event);
+        }
     }
 }
