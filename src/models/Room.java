@@ -26,6 +26,7 @@ public class Room implements Serializable {
         this.takenFrom = null;
         this.takenTo = null;
         this.isFree = true;
+        this.historyAccommodations = new ArrayList<>();
     }
 
     public String getLabel() {

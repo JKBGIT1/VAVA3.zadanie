@@ -2,6 +2,7 @@ package design_patterns;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import models.Accommodation;
 import models.Customer;
 import models.RoomCategory;
 import models.Service;
@@ -28,12 +29,14 @@ public class Serialization {
         ArrayList<Customer> arrayListCustomers;
         ArrayList<RoomCategory> arrayListCategories;
         ArrayList<Service> arrayListServices;
+        ArrayList<Accommodation> arrayListAccommodations;
     }
 
     // needed lists for program
     private ObservableList<Customer> allCustomers;
     private ObservableList<RoomCategory> allCategories;
     private ObservableList<Service> allServices;
+    private ObservableList<Accommodation> allAccommodations;
 
     // when unique Serialization object is created, program deserialize it's data
     private Serialization() {
@@ -48,17 +51,19 @@ public class Serialization {
             this.allCustomers = FXCollections.observableArrayList(objectForSerialization.arrayListCustomers);
             this.allCategories = FXCollections.observableArrayList(objectForSerialization.arrayListCategories);
             this.allServices = FXCollections.observableArrayList(objectForSerialization.arrayListServices);
+            this.allAccommodations = FXCollections.observableArrayList(objectForSerialization.arrayListAccommodations);
         } catch (IOException | ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             // if there was an exception, then create new observable list for program
             LOGGER.info("Creating new observable lists\n" +
                         "Something might went wrong\n" +
                         "or there wasn't any data in file booking_data.ser,\n" +
-                        "which is used for serialization."
+                        "which are used for serialization."
             );
             this.allCustomers = FXCollections.observableArrayList();
             this.allCategories = FXCollections.observableArrayList();
             this.allServices = FXCollections.observableArrayList();
+            this.allAccommodations = FXCollections.observableArrayList();
         }
     }
 
@@ -82,8 +87,15 @@ public class Serialization {
         this.serializeData();
     }
 
+    // this method stores newly created service and serialize whole object of using data for this program
     public void addServiceAndSerialize(Service newService) {
         this.getAllServices().add(newService);
+        this.serializeData();
+    }
+
+    // this method stores newly created accommodation and serialize whole object of using data for this program
+    public void addAccommodationAndSerialize(Accommodation newAccommodation) {
+        this.getAllAccommodations().add(newAccommodation);
         this.serializeData();
     }
 
@@ -99,6 +111,7 @@ public class Serialization {
             objectForSerialization.arrayListCustomers = new ArrayList<>(this.getAllCustomers());
             objectForSerialization.arrayListCategories = new ArrayList<>(this.getAllCategories());
             objectForSerialization.arrayListServices = new ArrayList<>(this.getAllServices());
+            objectForSerialization.arrayListAccommodations = new ArrayList<>(this.getAllAccommodations());
 
             out.writeObject(objectForSerialization);
         } catch (IOException e) {
@@ -129,5 +142,13 @@ public class Serialization {
 
     public void setAllServices(ObservableList<Service> allServices) {
         this.allServices = allServices;
+    }
+
+    public ObservableList<Accommodation> getAllAccommodations() {
+        return allAccommodations;
+    }
+
+    public void setAllAccommodations(ObservableList<Accommodation> allAccommodations) {
+        this.allAccommodations = allAccommodations;
     }
 }

@@ -123,6 +123,7 @@ public class ReservationAccommodationController extends HomepageController {
                 // after reservation or accommodation go back to customers Scene
                 this.customersScene(event);
             } catch (Exception e) {
+                e.printStackTrace();
                 LOGGER.info("Something went wrong during reservation, here is the exception message: " + e.getMessage());
                 this.showErrorPopUp(
                         "Wrong date format",
@@ -238,10 +239,19 @@ public class ReservationAccommodationController extends HomepageController {
         selectedRoom.getHistoryAccommodations().add(accommodation);
         // set accommodation to selected customer
         LOGGER.info("Reservation was created.");
+
+        Serialization.getInstance().getAllCustomers().remove(this.selectedCustomer);
+
         // set current accommodation to selected customer
         this.selectedCustomer.setCurrentAccommodation(accommodation);
         // add newly created accommodation to customer's history of accommodations
         this.selectedCustomer.getAccommodations().add(accommodation);
+
+        Serialization.getInstance().addCustomerAndSerialize(this.selectedCustomer);
+
+
+
+
         this.showSuccessPopUp(
                 "Success",
                 "Accommodation was successfully created."

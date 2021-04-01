@@ -65,7 +65,7 @@ public class Reservation implements Serializable {
         // Taken from https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
         calculatePrice = calculatePrice * 100;
         calculatePrice = Math.round(calculatePrice);
-        calculatePrice = calculatePrice /100;
+        calculatePrice = calculatePrice / 100;
         
         return calculatePrice;
     }

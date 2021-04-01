@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ public class Accommodation implements Serializable {
     private Date dateFrom;
     private Date dateTo;
     private double price;
-    private boolean isPayed;
+    private Payment payment;
     private ArrayList<UsedService> usedServices;
 
     public Accommodation(Date dateFrom, Date dateTo, double price, Room reservedRoom) {
@@ -17,7 +18,7 @@ public class Accommodation implements Serializable {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.price = price;
-        this.isPayed = false;
+        this.payment = null;
         this.usedServices = new ArrayList<>();
     }
 
@@ -41,6 +42,12 @@ public class Accommodation implements Serializable {
         return dateTo;
     }
 
+    public String getDateToAsString() {
+        // Taken from https://www.javatpoint.com/java-simpledateformat
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        return formatter.format(this.dateTo);
+    }
+
     public void setDateTo(Date dateTo) {
         this.dateTo = dateTo;
     }
@@ -53,12 +60,12 @@ public class Accommodation implements Serializable {
         this.price = price;
     }
 
-    public boolean isPayed() {
-        return isPayed;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setPayed(boolean payed) {
-        isPayed = payed;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public ArrayList<UsedService> getUsedServices() {
@@ -88,7 +95,7 @@ public class Accommodation implements Serializable {
         // Taken from https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
         calculatePrice = calculatePrice * 100;
         calculatePrice = Math.round(calculatePrice);
-        calculatePrice = calculatePrice /100;
+        calculatePrice = calculatePrice / 100;
 
         return calculatePrice;
     }
