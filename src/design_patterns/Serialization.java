@@ -3,8 +3,8 @@ package design_patterns;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Customer;
-import models.Room;
 import models.RoomCategory;
+import models.Service;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,11 +27,13 @@ public class Serialization {
     private static class ObjectForSerialization implements Serializable {
         ArrayList<Customer> arrayListCustomers;
         ArrayList<RoomCategory> arrayListCategories;
+        ArrayList<Service> arrayListServices;
     }
 
     // needed lists for program
     private ObservableList<Customer> allCustomers;
     private ObservableList<RoomCategory> allCategories;
+    private ObservableList<Service> allServices;
 
     // when unique Serialization object is created, program deserialize it's data
     private Serialization() {
@@ -45,6 +47,7 @@ public class Serialization {
             // casting taken from https://stackoverflow.com/questions/43162261/java-lang-classcastexception-java-util-arraylist-cannot-be-cast-to-javafx-colle
             this.allCustomers = FXCollections.observableArrayList(objectForSerialization.arrayListCustomers);
             this.allCategories = FXCollections.observableArrayList(objectForSerialization.arrayListCategories);
+            this.allServices = FXCollections.observableArrayList(objectForSerialization.arrayListServices);
         } catch (IOException | ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             // if there was an exception, then create new observable list for program
@@ -55,6 +58,7 @@ public class Serialization {
             );
             this.allCustomers = FXCollections.observableArrayList();
             this.allCategories = FXCollections.observableArrayList();
+            this.allServices = FXCollections.observableArrayList();
         }
     }
 
@@ -78,6 +82,11 @@ public class Serialization {
         this.serializeData();
     }
 
+    public void addServiceAndSerialize(Service newService) {
+        this.getAllServices().add(newService);
+        this.serializeData();
+    }
+
     public void serializeData() {
         // get serialized data from /booking_data.ser
         try (FileOutputStream fileOut = new FileOutputStream("booking_data.ser");
@@ -89,6 +98,7 @@ public class Serialization {
             // casting taken from https://stackoverflow.com/questions/39872697/how-to-convert-an-observable-list-to-an-array-list-java
             objectForSerialization.arrayListCustomers = new ArrayList<>(this.getAllCustomers());
             objectForSerialization.arrayListCategories = new ArrayList<>(this.getAllCategories());
+            objectForSerialization.arrayListServices = new ArrayList<>(this.getAllServices());
 
             out.writeObject(objectForSerialization);
         } catch (IOException e) {
@@ -111,5 +121,13 @@ public class Serialization {
 
     public void setAllCategories(ObservableList<RoomCategory> allCategories) {
         this.allCategories = allCategories;
+    }
+
+    public ObservableList<Service> getAllServices() {
+        return allServices;
+    }
+
+    public void setAllServices(ObservableList<Service> allServices) {
+        this.allServices = allServices;
     }
 }
