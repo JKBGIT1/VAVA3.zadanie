@@ -31,10 +31,10 @@ public class AddRoomController extends HomepageController {
     @FXML
     private TextArea taRoomNotes;
 
-    private RoomCategory selectedCategory;
+    private final RoomCategory selectedCategory;
 
     private final ObservableList<String> uploadedImagesText = FXCollections.observableArrayList();
-    private final HashMap<String, Image> stringImageHashMap = new HashMap<String, Image>();
+    private final HashMap<String, Image> stringImageHashMap = new HashMap<>();
 
     public AddRoomController(RoomCategory roomCategory) {
         this.selectedCategory = roomCategory;
@@ -49,10 +49,13 @@ public class AddRoomController extends HomepageController {
                 private final ImageView imageView = new ImageView();
                 @Override
                 public void updateItem(String name, boolean empty) {
+                    // call parent updateItem
                     super.updateItem(name, empty);
                     if (empty) {
                         setGraphic(null);
                     } else {
+                        // get image from hashmap with it's key
+                        // and display it in list cell
                         imageView.setImage(stringImageHashMap.get(name));
                         setGraphic(imageView);
                     }
@@ -68,11 +71,14 @@ public class AddRoomController extends HomepageController {
                     "You have to select image, which you want to remove"
             );
         } else {
+            // get observable list of all selected items in listview
             ObservableList<String> imageKey = this.imagesListView.getSelectionModel().getSelectedItems();
+            // delete these images from hash map and their indexes from observable list
             for (String item : imageKey) {
                 this.stringImageHashMap.remove(item);
                 this.uploadedImagesText.remove(item);
             }
+            LOGGER.info("User removed uploaded images.");
         }
     }
 
@@ -95,10 +101,14 @@ public class AddRoomController extends HomepageController {
             if (file != null) {
                 // create new image
                 Image image = new Image(file.toURI().toString(), 250, 250, false, false);
+                // get list index of this image and store it under this index into hashmap
                 String index = String.valueOf(this.uploadedImagesText.size());
                 this.stringImageHashMap.put(index, image);
                 this.uploadedImagesText.add(index);
+                LOGGER.info("Image was uploaded.");
             }
+
+            LOGGER.info("User didn't select an image for upload.");
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.info("Something went wrong during file uploading. Here is message " + e.getMessage());
@@ -135,10 +145,13 @@ public class AddRoomController extends HomepageController {
                     roomLabel,
                     taRoomNotes.getText(),
                     this.selectedCategory.getCategoryName(),
+                    this.selectedCategory.getPrice(),
                     roomGallery
             ));
             // serialize newly created room
             Serialization.getInstance().serializeData();
+            // show successful popup
+            this.showSuccessPopUp("Success", "Room was successfully created.");
             // switch back to room scene
             this.roomsScene(event);
         }

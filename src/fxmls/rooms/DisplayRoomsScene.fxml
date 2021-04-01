@@ -74,60 +74,63 @@
                     </children>
                 </GridPane>
             </top>
-         <center>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <BorderPane.margin>
-                  <Insets left="65.0" right="65.0" />
-               </BorderPane.margin>
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+            <center>
+                <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <BorderPane.margin>
+                        <Insets left="65.0" right="65.0" />
+                    </BorderPane.margin>
+                    <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2">
+                            <children>
+                                <Label fx:id="tableViewLabel" text="All rooms in category:">
+                                    <font>
+                                        <Font name="System Bold" size="21.0" />
+                                    </font>
+                                </Label>
+                                <TableView fx:id="roomsTableView" prefHeight="572.0" prefWidth="1199.0">
+                                    <columns>
+                                        <TableColumn fx:id="roomLabelCol" prefWidth="152.0" text="Room label" />
+                                        <TableColumn fx:id="noteCol" prefWidth="401.0" text="Note" />
+                                        <TableColumn fx:id="priceCol" prefWidth="170.0" text="Price/night" />
+                              <TableColumn fx:id="takenFromCol" prefWidth="170.0" text="Taken from" />
+                              <TableColumn fx:id="takenToCol" prefWidth="170.0" text="Taken to" />
+                              <TableColumn fx:id="freeCol" prefWidth="135.0" text="Free" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                            <GridPane.margin>
+                                <Insets top="25.0" />
+                            </GridPane.margin>
+                        </VBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <Button mnemonicParsing="false" onMouseClicked="#roomDetail" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #1873d3;" text="Detail" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Label text="All room categories:">
-                           <font>
-                              <Font name="System Bold" size="21.0" />
-                           </font>
-                        </Label>
-                        <TableView fx:id="roomCategoryTableView" prefHeight="572.0" prefWidth="1199.0">
-                          <columns>
-                            <TableColumn fx:id="categoryCol" prefWidth="219.0" text="Category" />
-                            <TableColumn fx:id="descriptionCol" prefWidth="778.0" text="Description" />
-                              <TableColumn fx:id="priceCol" prefWidth="201.0" text="Price/night" />
-                          </columns>
-                        </TableView>
-                     </children>
-                     <GridPane.margin>
-                        <Insets top="25.0" />
-                     </GridPane.margin>
-                  </VBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.rowIndex="1">
-                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#displayRoomsScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #1873d3;" text="Display rooms" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#addRoomScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Add room" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#addCategoryScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Add category" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
                      </children>
                   </HBox>
-               </children>
-            </GridPane>
-         </center>
+                    </children>
+                </GridPane>
+            </center>
         </BorderPane>
     </children>
 </GridPane>

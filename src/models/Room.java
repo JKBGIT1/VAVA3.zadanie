@@ -10,15 +10,17 @@ public class Room implements Serializable {
     private String label;
     private String note;
     private String category;
+    private double price;
     private ArrayList<Image> gallery;
     private Date takenFrom;
     private Date takenTo;
     private boolean isFree;
 
-    public Room(String label, String note, String category, ArrayList<Image> gallery) {
+    public Room(String label, String note, String category, double price, ArrayList<Image> gallery) {
         this.label = label;
         this.note = note;
         this.category = category;
+        this.price = price;
         this.gallery = gallery;
         this.takenFrom = null;
         this.takenTo = null;
@@ -49,6 +51,14 @@ public class Room implements Serializable {
         this.category = category;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public ArrayList<Image> getGallery() {
         return gallery;
     }
@@ -73,11 +83,11 @@ public class Room implements Serializable {
         this.takenTo = takenTo;
     }
 
-    public boolean isFree() {
+    public boolean getIsFree() {
         return isFree;
     }
 
-    public void setFree(boolean free) {
+    public void setIsFree(boolean free) {
         isFree = free;
     }
 }

@@ -38,12 +38,26 @@ public class RoomsController extends HomepageController {
         }
     }
 
-    public void displayRoomsScene() {
-        LOGGER.info("Switching to DisplayRooms scene.");
+    public void displayRoomsScene(MouseEvent event) {
+        if (this.roomCategoryTableView.getSelectionModel().getSelectedItem() == null) {
+            LOGGER.info("User didn't select room category.");
+            this.showErrorPopUp(
+                    "Select category",
+                    "You need to select category to display it's rooms"
+            );
+        } else {
+            RoomCategory roomCategory = this.roomCategoryTableView.getSelectionModel().getSelectedItem();
+            LOGGER.info("Switching to DisplayRooms scene.");
+
+            this.setScenePath(DISPLAY_ROOMS_SCENE);
+            this.setController(new DisplayRoomsController(roomCategory));
+            this.switchScene(event);
+        }
     }
 
     public void addRoomScene(MouseEvent event) {
         if (this.roomCategoryTableView.getSelectionModel().getSelectedItem() == null) {
+            LOGGER.info("User didn't select room category.");
             this.showErrorPopUp(
                     "Select category",
                     "You have to select category, where you want to add room."
