@@ -76,12 +76,12 @@ public class Customer implements Serializable {
         // If customer isn't accommodated, then display None
         if (this.currentAccommodation == null) {
             return "None";
-        } else if (this.currentAccommodation.getRoom() == null) {
+        } else if (this.currentAccommodation.getReservedRoom() == null) {
             return "None";
         }
 
         // otherwise display room label
-        return this.currentAccommodation.getRoom().getLabel();
+        return this.currentAccommodation.getReservedRoom().getLabel();
     }
 
     public ArrayList<Accommodation> getAccommodations() {

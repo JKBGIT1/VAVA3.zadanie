@@ -15,6 +15,7 @@ public class Room implements Serializable {
     private Date takenFrom;
     private Date takenTo;
     private boolean isFree;
+    private ArrayList<Accommodation> historyAccommodations;
 
     public Room(String label, String note, String category, double price, ArrayList<Image> gallery) {
         this.label = label;
@@ -24,7 +25,7 @@ public class Room implements Serializable {
         this.gallery = gallery;
         this.takenFrom = null;
         this.takenTo = null;
-        this.isFree = false;
+        this.isFree = true;
     }
 
     public String getLabel() {
@@ -89,5 +90,13 @@ public class Room implements Serializable {
 
     public void setIsFree(boolean free) {
         isFree = free;
+    }
+
+    public ArrayList<Accommodation> getHistoryAccommodations() {
+        return historyAccommodations;
+    }
+
+    public void setHistoryAccommodations(ArrayList<Accommodation> historyAccommodations) {
+        this.historyAccommodations = historyAccommodations;
     }
 }

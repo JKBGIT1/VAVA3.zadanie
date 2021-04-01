@@ -10,13 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.Room;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +35,7 @@ public class HomepageController implements Initializable {
 
     public static final String CUSTOMERS_SCENE = "/fxmls/customers/CustomersScene.fxml";
     public static final String ADD_CUSTOMER_SCENE = "/fxmls/customers/AddCustomerScene.fxml";
+    public static final String RESERVATION_ACCOMMODATION_SCENE = "/fxmls/customers/ReservationAccommodationScene.fxml";
 
     public static final String SERVICES_SCENE = "/fxmls/services/ServicesScene.fxml";
 
@@ -158,6 +158,26 @@ public class HomepageController implements Initializable {
     public void quit() {
         LOGGER.info("End of the program.");
         System.exit(0);
+    }
+
+    /*
+     * Mapping attributes to columns in TableView
+     */
+
+    public void mapCustomers(
+        TableColumn<Room, String> roomLabel,
+        TableColumn<Room, String> categoryCol,
+        TableColumn<Room, Double> priceCol,
+        TableColumn<Room, Date> dateFromCol,
+        TableColumn<Room, Date> dateToCol,
+        TableColumn<Room, Boolean> freeCol
+    ) {
+        roomLabel.setCellValueFactory(new PropertyValueFactory<>("label"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        dateFromCol.setCellValueFactory(new PropertyValueFactory<>("dateFrom"));
+        dateToCol.setCellValueFactory(new PropertyValueFactory<>("dateTo"));
+        freeCol.setCellValueFactory(new PropertyValueFactory<>("isFree"));
     }
 
     /*

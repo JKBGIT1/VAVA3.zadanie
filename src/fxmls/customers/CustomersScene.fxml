@@ -105,24 +105,29 @@
                         </TableView>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#cancelReservation" prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: #dc3545;" text="Cancel reservation" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
                         <Button mnemonicParsing="false" onMouseClicked="#detailCustomerScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #1873d3;" text="Detail" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#reservationScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #1873d3;" text="Make reservation" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#accommodateScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Accommodate" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
                         <Button mnemonicParsing="false" onMouseClicked="#addCustomerScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Add customer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#reservationAccommodationScene" prefHeight="65.0" prefWidth="250.0" style="-fx-background-color: #28a745;" text="Reserve/Accommodate" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#accommodateBasedOnReservation" prefHeight="65.0" prefWidth="310.0" style="-fx-background-color: #28a745;" text="Accommodate based reservation" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
