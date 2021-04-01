@@ -1,17 +1,22 @@
 package controllers.rooms;
 
 import controllers.HomepageController;
+import design_patterns.Serialization;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import models.Room;
+import models.RoomCategory;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -20,49 +25,55 @@ public class AddRoomController extends HomepageController {
     private static final Logger LOGGER = Logger.getLogger(AddRoomController.class.getName());
 
     @FXML
-    private TableView<Image> imagesTableView;
+    private ListView<String> imagesListView;
     @FXML
-    private TableColumn<Image, Image> imageCol;
+    private TextField tfRoomLabel;
+    @FXML
+    private TextArea taRoomNotes;
 
-    private ObservableList<Image> uploadedImages;
+    private RoomCategory selectedCategory;
 
-    // TODO: Find out how to upload display multiple images
+    private final ObservableList<String> uploadedImagesText = FXCollections.observableArrayList();
+    private final HashMap<String, Image> stringImageHashMap = new HashMap<String, Image>();
+
+    public AddRoomController(RoomCategory roomCategory) {
+        this.selectedCategory = roomCategory;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Set observable list for ListView
-        if (this.imagesTableView != null) {
-            // Taken from https://stackoverflow.com/questions/22005115/how-to-add-an-image-into-a-javafx-tableview-column
-            imageCol.setCellFactory(param -> {
-                // My explanation to code
-                // Firstly program creates ImageView object,
-                // which will be in tableColumn and sets it's height and width
-                ImageView imageview = new ImageView();
-                imageview.setFitHeight(200);
-                imageview.setFitWidth(200);
-
-                // Now program creates TableCell object for Employer class with Image object content
-                TableCell<Image, Image> cell = new TableCell<Image, Image>() {
-                    // In this function it will set image to previously created imageview
-                    public void updateItem(Image item, boolean empty) {
-                        if (item != null) {
-                            imageview.setImage(item);
-                        }
+        if (this.imagesListView != null) {
+            this.imagesListView.setItems(this.uploadedImagesText);
+            // Taken from https://stackoverflow.com/questions/33592308/javafx-how-to-put-imageview-inside-listview
+            this.imagesListView.setCellFactory(param -> new ListCell<String>() {
+                private final ImageView imageView = new ImageView();
+                @Override
+                public void updateItem(String name, boolean empty) {
+                    super.updateItem(name, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        imageView.setImage(stringImageHashMap.get(name));
+                        setGraphic(imageView);
                     }
-                };
-                // this will attach the image to the cell
-                cell.setGraphic(imageview);
-                return cell;
+                }
             });
-            // set logo attribute as CellValueFactory
-            imageCol.setCellValueFactory(new PropertyValueFactory<>(""));
-
-            // Fill tableView with Employers data.
-            imagesTableView.setItems(this.uploadedImages);
         }
     }
 
     public void removeImage() {
-
+        if (this.imagesListView.getSelectionModel().getSelectedItems() == null) {
+            this.showErrorPopUp(
+                    "Select image",
+                    "You have to select image, which you want to remove"
+            );
+        } else {
+            ObservableList<String> imageKey = this.imagesListView.getSelectionModel().getSelectedItems();
+            for (String item : imageKey) {
+                this.stringImageHashMap.remove(item);
+                this.uploadedImagesText.remove(item);
+            }
+        }
     }
 
     public void uploadImage() {
@@ -80,17 +91,56 @@ public class AddRoomController extends HomepageController {
 
             // show new dialog and store selected image into File object
             File file = fileChooser.showOpenDialog(null);
-            // create new image
-            Image image = new Image(file.toURI().toString(), 200, 200, false, false);
-            // add new image
-            this.uploadedImages.add(image);
+
+            if (file != null) {
+                // create new image
+                Image image = new Image(file.toURI().toString(), 250, 250, false, false);
+                String index = String.valueOf(this.uploadedImagesText.size());
+                this.stringImageHashMap.put(index, image);
+                this.uploadedImagesText.add(index);
+            }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            LOGGER.info("Something went wrong during file uploading. Here is message " + e.getMessage());
         }
     }
 
     public void createRoom(MouseEvent event) {
-        LOGGER.info("Start of the room creation.");
-        this.roomsScene(event);
+        String roomLabel = tfRoomLabel.getText();
+
+        if (roomLabel.equals("")) {
+            LOGGER.info("User didn't enter room label.");
+            this.showErrorPopUp("Enter Label", "Each room has to have label.");
+        } else {
+            // check if room label doesn't exists
+            for (Room room: this.selectedCategory.getRoomsInCategory()) {
+                if (roomLabel.equals(room.getLabel())) {
+                    LOGGER.info("User entered room label, which already exists.");
+                    this.showErrorPopUp(
+                            "Already exists",
+                            "The room label, which you have entered already exists."
+                    );
+                    return;
+                }
+            }
+
+            ArrayList<Image> roomGallery = new ArrayList<>();
+            // create arraylist of images as a room gallery
+            for (String index : this.uploadedImagesText) {
+                roomGallery.add(this.stringImageHashMap.get(index));
+            }
+
+            // add newly create room in category
+            selectedCategory.getRoomsInCategory().add(new Room(
+                    roomLabel,
+                    taRoomNotes.getText(),
+                    this.selectedCategory.getCategoryName(),
+                    roomGallery
+            ));
+            // serialize newly created room
+            Serialization.getInstance().serializeData();
+            // switch back to room scene
+            this.roomsScene(event);
+        }
     }
 }

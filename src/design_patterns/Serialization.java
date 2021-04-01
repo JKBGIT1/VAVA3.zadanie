@@ -3,6 +3,7 @@ package design_patterns;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Customer;
+import models.Room;
 import models.RoomCategory;
 
 import java.io.*;

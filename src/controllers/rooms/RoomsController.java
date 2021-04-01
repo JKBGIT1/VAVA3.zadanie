@@ -43,10 +43,19 @@ public class RoomsController extends HomepageController {
     }
 
     public void addRoomScene(MouseEvent event) {
-        LOGGER.info("Switching to AddRoom scene.");
-        this.setScenePath(ADD_ROOM_SCENE);
-        this.setController(new AddRoomController());
-        this.switchScene(event);
+        if (this.roomCategoryTableView.getSelectionModel().getSelectedItem() == null) {
+            this.showErrorPopUp(
+                    "Select category",
+                    "You have to select category, where you want to add room."
+            );
+        } else {
+            RoomCategory roomCategory = this.roomCategoryTableView.getSelectionModel().getSelectedItem();
+
+            LOGGER.info("Switching to AddRoom scene.");
+            this.setScenePath(ADD_ROOM_SCENE);
+            this.setController(new AddRoomController(roomCategory));
+            this.switchScene(event);
+        }
     }
 
     public void addCategoryScene(MouseEvent event) {

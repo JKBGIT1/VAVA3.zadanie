@@ -1,5 +1,5 @@
+import design_patterns.Serialization;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,7 +9,9 @@ import controllers.HomepageController;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
+        // deserialize data from booking_data.ser before stage shows
+        Serialization.getInstance();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/fxmls/HomepageScene.fxml"));
 
