@@ -99,6 +99,11 @@ public class CustomersController extends HomepageController {
         this.checkCustomerSelection();
         if (this.selectedCustomer != null) {
             LOGGER.info("Switching to DetailCustomer scene");
+            this.setScenePath(DETAIL_CUSTOMER_SCENE);
+            this.setController(new DetailCustomerController(
+                    this.selectedCustomer
+            ));
+            this.switchScene(event);
         }
     }
 

@@ -42,7 +42,6 @@ public class AccommodationsController extends HomepageController {
             // check if he/she paid for his latter accommodations
             for (Customer customer : allCustomers) {
                 // go through each customer's accommodations
-                System.out.println(customer.getAccommodations());
                 for (Accommodation accommodation: customer.getAccommodations()) {
                     // if customer didn't paid for accommodation and it is after accommodation display it in table
                     if (accommodation.getPayment() == null && currentDate.after(accommodation.getDateTo())) {

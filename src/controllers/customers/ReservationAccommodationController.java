@@ -95,6 +95,7 @@ public class ReservationAccommodationController extends HomepageController {
                 Date dateFrom = this.convertStringToDate(dateFromString);
                 Date dateTo = this.convertStringToDate(dateToString);
 
+                // Taken from https://stackoverflow.com/questions/20165564/calculating-days-between-two-dates-with-java
                 // calculate difference between days in milliseconds
                 long diff = dateTo.getTime() - dateFrom.getTime();
                 // convert milliseconds to days

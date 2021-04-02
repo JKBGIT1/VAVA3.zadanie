@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -79,7 +78,7 @@
                 <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="795.0" minWidth="795.0" prefWidth="795.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -88,73 +87,73 @@
                         <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
                             <children>
-                                <Label text="All accommodations: ">
+                                <Label text="All customers accommodations">
                                     <font>
                                         <Font name="System Bold" size="22.0" />
                                     </font>
                                 </Label>
-                                <TableView fx:id="allAccommodationsTableView" prefHeight="368.0" prefWidth="522.0">
+                                <TableView fx:id="accommodationsTableView" prefHeight="530.0" prefWidth="1329.0">
                                     <columns>
-                              <TableColumn fx:id="dateFromCol" minWidth="0.0" prefWidth="215.0" text="Date From" />
-                                        <TableColumn fx:id="dateToCol" minWidth="0.0" prefWidth="211.0" text="Date To" />
-                                        <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="175.0" text="Price" />
+                                        <TableColumn fx:id="roomLabelCol" minWidth="0.0" prefWidth="190.0" text="Room label" />
+                                        <TableColumn fx:id="categoryCol" minWidth="0.0" prefWidth="171.0" text="Category" />
+                                        <TableColumn fx:id="dateFromCol" minWidth="0.0" prefWidth="157.0" text="Date From" />
+                              <TableColumn fx:id="dateToCol" minWidth="0.0" prefWidth="150.0" text="Date To" />
+                                        <TableColumn fx:id="priceCol" minWidth="0.0" prefWidth="126.0" text="Price" />
                                     </columns>
                                 </TableView>
                             </children>
                         </VBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#roomsScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
-                                    <font>
-                                        <Font name="System Bold" size="18.0" />
-                                    </font>
-                                </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#accommodationDetail" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #1873d3;" text="Detail" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#addService" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Add service" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#makePayment" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #28a745;" text="Make payment" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
                             </children>
                         </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="3">
                      <children>
-                        <HBox prefHeight="66.0" prefWidth="602.0">
-                           <children>
-                              <Label text="Room label: ">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="roomLabel" text="Label">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="67.0" prefWidth="602.0">
-                           <children>
-                              <Label text="Category: ">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="categoryLabel" text="Label">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                     <children>
-                        <Label text="Room notes: ">
+                        <Label text="Services:">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                        <TableView fx:id="servicesTableView" prefHeight="504.0" prefWidth="409.0">
+                          <columns>
+                            <TableColumn fx:id="serviceDescriptionCol" prefWidth="305.0" text="Description" />
+                              <TableColumn fx:id="servicePriceCol" prefWidth="78.0" text="Price" />
+                          </columns>
+                        </TableView>
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets right="25.0" />
+                     </GridPane.margin>
                   </VBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                                <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Button>
+                     </children>
+                  </HBox>
                     </children>
                     <BorderPane.margin>
                         <Insets left="65.0" right="60.0" top="20.0" />

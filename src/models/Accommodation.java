@@ -38,6 +38,12 @@ public class Accommodation implements Serializable {
         this.dateFrom = dateFrom;
     }
 
+    public String getDateFromAsString() {
+        // Taken from https://www.javatpoint.com/java-simpledateformat
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        return formatter.format(this.dateFrom);
+    }
+
     public Date getDateTo() {
         return dateTo;
     }

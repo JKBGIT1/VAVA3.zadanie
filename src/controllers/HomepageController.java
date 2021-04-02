@@ -36,6 +36,8 @@ public class HomepageController implements Initializable {
     public static final String CUSTOMERS_SCENE = "/fxmls/customers/CustomersScene.fxml";
     public static final String ADD_CUSTOMER_SCENE = "/fxmls/customers/AddCustomerScene.fxml";
     public static final String RESERVATION_ACCOMMODATION_SCENE = "/fxmls/customers/ReservationAccommodationScene.fxml";
+    public static final String DETAIL_CUSTOMER_SCENE = "/fxmls/customers/DetailCustomerScene.fxml";
+    public static final String DETAIL_ACCOMMODATION_SCENE = "/fxmls/customers/DetailAccommodationScene.fxml";
 
     public static final String SERVICES_SCENE = "/fxmls/services/ServicesScene.fxml";
 
