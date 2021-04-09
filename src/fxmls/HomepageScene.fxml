@@ -158,7 +158,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="currentTime" text="current time">
+                        <Label fx:id="currentTimeLabel" text="current time">
                            <font>
                               <Font size="18.0" />
                            </font>

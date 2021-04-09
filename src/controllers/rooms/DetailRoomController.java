@@ -25,6 +25,8 @@ public class DetailRoomController extends RoomsController {
     private TableColumn<Accommodation, Double> priceCol;
     @FXML
     private Label roomLabel, categoryLabel;
+    @FXML
+    private TextArea taRoomNotes;
 
     private final Room selectedRoom;
 
@@ -65,7 +67,16 @@ public class DetailRoomController extends RoomsController {
             allAccommodationsTableView.setItems(FXCollections.observableArrayList(this.selectedRoom.getHistoryAccommodations()));
         }
 
+        if (taRoomNotes != null) {
+            taRoomNotes.setText(this.selectedRoom.getNote());
+        }
+
         roomLabel.setText(this.selectedRoom.getLabel());
         categoryLabel.setText(this.selectedRoom.getCategory());
+    }
+
+    public void editRoomNotes() {
+        this.selectedRoom.setNote(taRoomNotes.getText());
+        this.showSuccessPopUp("Success", "Room note was successfully changed.");
     }
 }

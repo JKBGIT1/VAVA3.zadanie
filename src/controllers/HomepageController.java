@@ -23,6 +23,8 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
@@ -55,9 +57,13 @@ public class HomepageController implements Initializable {
     private Label currentTime;
     @FXML
     private ComboBox<String> languageComboBox;
+    @FXML
+    private Label currentTimeLabel;
 
     private String scenePath;
     private Object controller;
+
+    private LocalDateTime localDateTime;
 
     /*
      * Start of getters and setters
@@ -97,6 +103,12 @@ public class HomepageController implements Initializable {
             languageComboBox.setItems(FXCollections.observableArrayList(
                     "SK", "EN", "US"
             ));
+        }
+
+        if (currentTimeLabel != null) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            currentTimeLabel.setText(dtf.format(now));
         }
     }
 
