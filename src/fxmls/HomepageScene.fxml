@@ -172,7 +172,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField>
+                        <TextField fx:id="tfNewTime">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -181,7 +181,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFDEAD;" GridPane.columnIndex="2">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="300.0" style="-fx-background-color: #663E0A;" text="%change_time_btn" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#changeCurrentTime" prefWidth="250.0" style="-fx-background-color: #663E0A;" text="%change_time_btn" textFill="WHITE">
                            <font>
                               <Font size="24.0" />
                            </font>

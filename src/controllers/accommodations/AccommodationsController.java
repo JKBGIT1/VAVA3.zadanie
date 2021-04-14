@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Accommodation;
 import models.Customer;
+import system_time.SystemTime;
 
 import java.net.URL;
 import java.util.Date;
@@ -34,8 +35,8 @@ public class AccommodationsController extends HomepageController {
             // get all customers
             ObservableList<Customer> allCustomers = FXCollections.observableArrayList(Serialization.getInstance().getAllCustomers());
             ObservableList<Customer> customersWithUnpaidAcc = FXCollections.observableArrayList();
-            // get current date for checking condition inside for loop
-            Date currentDate = new Date();
+            // get time for this program and convert it to date
+            Date currentDate = new Date(SystemTime.getInstance().getCurrentProgramTime());
 
             LOGGER.info("Adding all unpaid accommodations to customersWithUnpaidAcc");
             // go through each customer and his/her accommodation history

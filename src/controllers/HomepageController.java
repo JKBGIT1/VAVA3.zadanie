@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Room;
+import system_time.SystemTime;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +25,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
@@ -59,6 +59,8 @@ public class HomepageController implements Initializable {
     private ComboBox<String> languageComboBox;
     @FXML
     private Label currentTimeLabel;
+    @FXML
+    private TextField tfNewTime;
 
     private String scenePath;
     private Object controller;
@@ -106,9 +108,9 @@ public class HomepageController implements Initializable {
         }
 
         if (currentTimeLabel != null) {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            currentTimeLabel.setText(dtf.format(now));
+            Date currentDate = new Date(SystemTime.getInstance().getCurrentProgramTime());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            currentTimeLabel.setText(simpleDateFormat.format(currentDate));
         }
     }
 
@@ -188,6 +190,44 @@ public class HomepageController implements Initializable {
     public void quit() {
         LOGGER.info("End of the program.");
         System.exit(0);
+    }
+
+    /*
+     * Changing time method
+     */
+
+    public void changeCurrentTime() {
+        // check if scene contains TextField with tfNewTime id
+        if (tfNewTime != null && currentTimeLabel != null) {
+            String currentTimeString = tfNewTime.getText();
+            if (currentTimeString.equals("")) {
+                this.showErrorPopUp("Error", "You have to enter new time.");
+                return;
+            }
+
+            try {
+                // Inspiration from https://beginnersbook.com/2014/01/how-to-get-time-in-milliseconds-in-java/
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                // convert entered time to java.util.Date
+                Date changedDate = simpleDateFormat.parse(currentTimeString);
+                // set new time of program
+                SystemTime.getInstance().setProgramTime(changedDate.getTime());
+                // change current time label
+                currentTimeLabel.setText(currentTimeString);
+                // empty tfNewTime
+                tfNewTime.setText("");
+                // show success popup
+                this.showSuccessPopUp("Success", "Time was successfully changed.");
+            } catch (ParseException e) {
+                LOGGER.info("Unable to convert entered time to java.util.Date");
+                this.showErrorPopUp(
+                        "Wrong time format",
+                        "Time has to be in format yyyy/MM/dd HH:mm:ss"
+                );
+            } catch (Exception e) {
+                LOGGER.info("Something went wrong, here is exception message" + e.getMessage());
+            }
+        }
     }
 
     /*
