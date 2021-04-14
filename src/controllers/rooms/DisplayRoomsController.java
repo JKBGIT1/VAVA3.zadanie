@@ -12,7 +12,6 @@ import models.Room;
 import models.RoomCategory;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -27,7 +26,7 @@ public class DisplayRoomsController extends HomepageController {
     @FXML
     private TableColumn<Room, String> roomLabelCol, noteCol;
     @FXML
-    private TableColumn<Room, Date> takenFromCol, takenToCol;
+    private TableColumn<Room, String> takenFromCol, takenToCol;
     @FXML
     private TableColumn<Room, Boolean> freeCol;
     @FXML

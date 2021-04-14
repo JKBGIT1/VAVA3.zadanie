@@ -131,7 +131,7 @@
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="taRoomNotes" prefHeight="295.0" prefWidth="455.0">
+                        <TextArea fx:id="taRoomNotes" prefHeight="295.0" prefWidth="455.0" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font>

@@ -97,8 +97,9 @@
                         <TableView fx:id="roomCategoryTableView" prefHeight="572.0" prefWidth="1199.0">
                           <columns>
                             <TableColumn fx:id="categoryCol" prefWidth="219.0" text="Category" />
-                            <TableColumn fx:id="descriptionCol" prefWidth="778.0" text="Description" />
-                              <TableColumn fx:id="priceCol" prefWidth="201.0" text="Price/night" />
+                            <TableColumn fx:id="descriptionCol" prefWidth="605.0" text="Description" />
+                              <TableColumn fx:id="priceCol" prefWidth="183.0" text="Price/night" />
+                              <TableColumn fx:id="roomsNumberCol" prefWidth="192.0" text="Rooms number" />
                           </columns>
                         </TableView>
                      </children>

@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import models.*;
+import system_time.SystemTime;
 
 import java.net.URL;
 import java.util.Date;
@@ -113,8 +114,9 @@ public class DetailCustomerController extends HomepageController {
                 // increase total price for accommodation
                 accommodation.setPrice(accommodation.getPrice() + selectedService.getPrice());
                 // add used service to accommodation
-                accommodation.getUsedServices().add(
-                        new UsedService(selectedService, new Date()) // service was used today
+                accommodation.getUsedServices().add(new UsedService(
+                        selectedService,
+                        new Date(SystemTime.getInstance().getCurrentProgramTime())) // get current time in program
                 );
 
                 // add customer to all customers list with new UsedService
@@ -146,10 +148,16 @@ public class DetailCustomerController extends HomepageController {
                 "Payment type",
                 "Payment in cash?"
         );
-        accommodation.setPayment(new Payment(new Date(), paymentInCast));
+        // set payment to accommodation
+        accommodation.setPayment(new Payment(
+                new Date(SystemTime.getInstance().getCurrentProgramTime()),
+                paymentInCast)
+        );
         this.showSuccessPopUp(
                 "Success",
                 "Payment was successful."
         );
+        // serialize data about payment
+        Serialization.getInstance().serializeData();
     }
 }

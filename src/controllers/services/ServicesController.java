@@ -70,6 +70,10 @@ public class ServicesController extends HomepageController {
             ));
             // refresh table view to display newly added service
             servicesTableView.refresh();
+            // empty TextFields and TextArea
+            tfPrice.setText("");
+            tfServiceName.setText("");
+            taDescription.setText("");
             // display success pop up, because service was created
             this.showSuccessPopUp(
                     "Success",

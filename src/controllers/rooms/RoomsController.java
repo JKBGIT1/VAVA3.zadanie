@@ -2,6 +2,7 @@ package controllers.rooms;
 
 import controllers.HomepageController;
 import design_patterns.Serialization;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,7 +21,7 @@ public class RoomsController extends HomepageController {
     @FXML
     private TableView<RoomCategory> roomCategoryTableView;
     @FXML
-    private TableColumn<RoomCategory, String> categoryCol, descriptionCol;
+    private TableColumn<RoomCategory, String> categoryCol, descriptionCol, roomsNumberCol;
     @FXML
     private TableColumn<RoomCategory, Double>  priceCol;
 
@@ -32,6 +33,10 @@ public class RoomsController extends HomepageController {
             categoryCol.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
             descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
             priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+            roomsNumberCol.setCellValueFactory(
+                    // display number of rooms in category
+                    data -> new ReadOnlyStringWrapper(String.valueOf(data.getValue().getRoomsInCategory().size()))
+            );
 
             // display all room categories into roomCategoryTableView
             this.roomCategoryTableView.setItems(Serialization.getInstance().getAllCategories());

@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import models.Accommodation;
 import models.Customer;
+import models.Payment;
 import models.UsedService;
 
 import java.net.URL;
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
 public class DetailAccommodationController extends DetailCustomerController {
 
     @FXML
-    private Label roomLabel, categoryLabel, dateFromLabel, dateToLabel, priceLabel, paidLabel;
+    private Label roomLabel, categoryLabel, dateFromLabel, dateToLabel, priceLabel, paidLabel, paymentDayLabel;
     @FXML
     private TableView<UsedService> usedServicesTableView;
     @FXML
@@ -53,6 +54,27 @@ public class DetailAccommodationController extends DetailCustomerController {
         dateToLabel.setText(this.selectedAccommodation.getDateToAsString());
         priceLabel.setText(String.valueOf(this.selectedAccommodation.getPrice()));
         // ternary operator for displaying if accommodation was paid.
-        paidLabel.setText(this.selectedAccommodation.getPayment() == null ? "No" : "Yes");
+        paidLabel.setText(this.getPaymentString(this.selectedAccommodation.getPayment()));
+        // display payment date in paymentDayLabel if customer already paid for accommodation
+        paymentDayLabel.setText(this.getPaymentDate(this.selectedAccommodation.getPayment()));
+    }
+
+    // this method returns proper string to give right information about payment
+    public String getPaymentString(Payment payment) {
+        if (payment == null) {
+            return "No";
+        } else if (payment.isInCash()) {
+            return "In cash";
+        } else {
+            return "Not in cash";
+        }
+    }
+
+    public String getPaymentDate(Payment payment) {
+        if (payment == null) {
+            return "None";
+        } else {
+            return this.convertDateToString(payment.getDate());
+        }
     }
 }
