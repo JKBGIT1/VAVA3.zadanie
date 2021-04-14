@@ -2,6 +2,7 @@ package controllers.rooms;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,7 +11,10 @@ import javafx.scene.image.ImageView;
 import models.Accommodation;
 import models.Room;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DetailRoomController extends RoomsController {
@@ -37,7 +41,18 @@ public class DetailRoomController extends RoomsController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.imagesListView != null) {
-            this.imagesListView.setItems(FXCollections.observableArrayList(this.selectedRoom.getGallery()));
+            ObservableList<Image> allRoomImages = FXCollections.observableArrayList();
+
+            for (int i = 0; i < this.selectedRoom.getGallery().size(); i++) {
+                // inspiration https://www.tutorialspoint.com/How-to-convert-Byte-Array-to-Image-in-java
+                // create input stream from byte array
+                InputStream in = new ByteArrayInputStream(this.selectedRoom.getGallery().get(i));
+                // create image from input stream
+                Image image = new Image(in, 250, 250, false, false);
+                allRoomImages.add(image);
+            }
+
+            this.imagesListView.setItems(allRoomImages);
             this.imagesListView.setCellFactory(param -> new ListCell<Image>() {
                 private final ImageView imageView = new ImageView();
                 @Override

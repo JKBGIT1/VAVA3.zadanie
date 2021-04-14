@@ -11,13 +11,13 @@ public class Room implements Serializable {
     private String note;
     private String category;
     private double price;
-    private ArrayList<Image> gallery;
+    private ArrayList<byte[]> gallery;
     private Date takenFrom;
     private Date takenTo;
     private boolean isFree;
     private ArrayList<Accommodation> historyAccommodations;
 
-    public Room(String label, String note, String category, double price, ArrayList<Image> gallery) {
+    public Room(String label, String note, String category, double price, ArrayList<byte[]> gallery) {
         this.label = label;
         this.note = note;
         this.category = category;
@@ -61,11 +61,11 @@ public class Room implements Serializable {
         this.price = price;
     }
 
-    public ArrayList<Image> getGallery() {
+    public ArrayList<byte[]> getGallery() {
         return gallery;
     }
 
-    public void setGallery(ArrayList<Image> gallery) {
+    public void setGallery(ArrayList<byte[]> gallery) {
         this.gallery = gallery;
     }
 

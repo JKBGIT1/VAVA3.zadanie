@@ -5,7 +5,10 @@ import design_patterns.Serialization;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -13,8 +16,11 @@ import javafx.stage.FileChooser;
 import models.Room;
 import models.RoomCategory;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -34,7 +40,7 @@ public class AddRoomController extends HomepageController {
     private final RoomCategory selectedCategory;
 
     private final ObservableList<String> uploadedImagesText = FXCollections.observableArrayList();
-    private final HashMap<String, Image> stringImageHashMap = new HashMap<>();
+    private final HashMap<String, byte[]> stringImageHashMap = new HashMap<>();
 
     public AddRoomController(RoomCategory roomCategory) {
         this.selectedCategory = roomCategory;
@@ -54,9 +60,13 @@ public class AddRoomController extends HomepageController {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        // get image from hashmap with it's key
-                        // and display it in list cell
-                        imageView.setImage(stringImageHashMap.get(name));
+                        // inspiration https://www.tutorialspoint.com/How-to-convert-Byte-Array-to-Image-in-java
+                        // get byte array from hashmap with it's key
+                        InputStream in = new ByteArrayInputStream(stringImageHashMap.get(name));
+                        // create image
+                        Image image = new Image(in, 250, 250, false, false);
+                        // display image in list cell
+                        imageView.setImage(image);
                         setGraphic(imageView);
                     }
                 }
@@ -99,13 +109,14 @@ public class AddRoomController extends HomepageController {
             File file = fileChooser.showOpenDialog(null);
 
             if (file != null) {
-                // create new image
-                Image image = new Image(file.toURI().toString(), 250, 250, false, false);
-                // get list index of this image and store it under this index into hashmap
+                // create byte array from file
+                byte[] fileBytes = Files.readAllBytes(file.toPath());
+                // get list index of this byte array and store it under this index into hashmap
                 String index = String.valueOf(this.uploadedImagesText.size());
-                this.stringImageHashMap.put(index, image);
+                this.stringImageHashMap.put(index, fileBytes);
                 this.uploadedImagesText.add(index);
                 LOGGER.info("Image was uploaded.");
+                return;
             }
 
             LOGGER.info("User didn't select an image for upload.");
@@ -134,7 +145,7 @@ public class AddRoomController extends HomepageController {
                 }
             }
 
-            ArrayList<Image> roomGallery = new ArrayList<>();
+            ArrayList<byte[]> roomGallery = new ArrayList<>();
             // create arraylist of images as a room gallery
             for (String index : this.uploadedImagesText) {
                 roomGallery.add(this.stringImageHashMap.get(index));
