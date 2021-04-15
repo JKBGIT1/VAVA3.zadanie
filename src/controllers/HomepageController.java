@@ -4,8 +4,10 @@ import controllers.accommodations.AccommodationsController;
 import controllers.customers.CustomersController;
 import controllers.rooms.RoomsController;
 import controllers.services.ServicesController;
+import design_patterns.Serialization;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +19,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.Accommodation;
+import models.Customer;
+import models.Reservation;
 import models.Room;
 import system_time.SystemTime;
 
@@ -107,8 +112,10 @@ public class HomepageController implements Initializable {
                     "SK", "EN", "US"
             ));
         }
-
+        // display current time of program if scene contains label
         if (currentTimeLabel != null) {
+            // go through each customer and delete his/her reservation and accommodations if they expired
+            this.updateAccommodations();
             Date currentDate = new Date(SystemTime.getInstance().getCurrentProgramTime());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             currentTimeLabel.setText(simpleDateFormat.format(currentDate));
@@ -217,6 +224,8 @@ public class HomepageController implements Initializable {
                 currentTimeLabel.setText(currentTimeString);
                 // empty tfNewTime
                 tfNewTime.setText("");
+                // go through each customer and delete his/her reservation and accommodations if they expired
+                this.updateAccommodations();
                 // show success popup
                 this.showSuccessPopUp("Success", "Time was successfully changed.");
             } catch (ParseException e) {
@@ -229,6 +238,38 @@ public class HomepageController implements Initializable {
                 LOGGER.info("Something went wrong, here is exception message" + e.getMessage());
             }
         }
+    }
+
+    public void updateAccommodations() {
+        ObservableList<Customer> allCustomers = Serialization.getInstance().getAllCustomers();
+        Date currentProgramDate = new Date(SystemTime.getInstance().getCurrentProgramTime());
+
+        for (Customer customer : allCustomers) {
+            // get customer's current reservation
+            Reservation customerReservation = customer.getReservation();
+            // get customer's current accommodation
+            Accommodation customerAccommodation = customer.getCurrentAccommodation();
+            // if customer has currentAccommodation and it's dateTo is before current program time
+            // then set customer's current accommodation to null and free room
+            if (customerAccommodation != null && currentProgramDate.after(customerAccommodation.getDateTo())) {
+                // free room
+                customerAccommodation.getReservedRoom().setTakenTo(null);
+                customerAccommodation.getReservedRoom().setTakenFrom(null);
+                customerAccommodation.getReservedRoom().setIsFree(true);
+                // set customer's current accommodation to null
+                customer.setCurrentAccommodation(null);
+            } else if (customerReservation != null && currentProgramDate.after(customerReservation.getDateTo())) {
+                // if customer's reservation expired, free the room and delete reservation
+                customerReservation.getReservedRoom().setIsFree(true);
+                customerReservation.getReservedRoom().setTakenTo(null);
+                customerReservation.getReservedRoom().setTakenFrom(null);
+                // delete reservation
+                customer.setReservation(null);
+            }
+        }
+
+        // serialize changes
+        Serialization.getInstance().serializeData();
     }
 
     /*

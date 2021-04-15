@@ -172,7 +172,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfNewTime">
+                        <TextField fx:id="tfNewTime" promptText="yyyy/MM/dd HH:mm:ss">
                            <font>
                               <Font size="18.0" />
                            </font>
