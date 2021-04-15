@@ -188,17 +188,17 @@
                         </Button>
                      </children>
                   </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                  <VBox prefHeight="127.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="3">
                      <children>
-                        <Label text="%language_label">
+                        <ComboBox fx:id="languageComboBox" prefHeight="31.0" prefWidth="136.0" promptText="%language_label" />
+                        <Button mnemonicParsing="false" onMouseClicked="#changeLanguage" prefHeight="26.0" prefWidth="136.0" style="-fx-background-color: #663E0A;" text="%change_btn" textFill="WHITE">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="24.0" />
                            </font>
-                        </Label>
-                        <ComboBox fx:id="languageComboBox" prefHeight="31.0" prefWidth="136.0" />
+                        </Button>
                      </children>
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets top="5.0" />
                      </GridPane.margin>
                   </VBox>
                </children>

@@ -8,6 +8,7 @@ import design_patterns.Serialization;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,6 +36,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HomepageController implements Initializable {
@@ -72,6 +74,8 @@ public class HomepageController implements Initializable {
     private Object controller;
 
     private LocalDateTime localDateTime;
+    // localization and internationalization will be set based on this flag
+    private boolean slovakFlag;
 
     /*
      * Start of getters and setters
@@ -109,7 +113,7 @@ public class HomepageController implements Initializable {
         // if scene contains languageComboBox, then set items to it
         if (languageComboBox != null) {
             languageComboBox.setItems(FXCollections.observableArrayList(
-                    "SK", "EN", "US"
+                    "SK", "EN"
             ));
         }
         // display current time of program if scene contains label
@@ -167,8 +171,16 @@ public class HomepageController implements Initializable {
             if (!this.getScenePath().equals("")) {
                 // This was taken from my school project in second grade on DBS
                 // https://github.com/FIIT-DBS2020/project-hlavacka_muller/blob/master/src/GUI/SwitchScene.java
-                Locale locale = new Locale("en", "UK");
-                ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.english_en_UK", locale);
+                ResourceBundle resourceBundle;
+                // check if language should be in slovak language
+                // otherwise set english
+                if (this.slovakFlag) {
+                    Locale locale = new Locale("sk", "SK");
+                    resourceBundle = ResourceBundle.getBundle("resources.slovak_sk_SK", locale);
+                } else {
+                    Locale locale = new Locale("en", "UK");
+                    resourceBundle = ResourceBundle.getBundle("resources.english_en_UK", locale);
+                }
                 // create new FXMLloader and set location
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource(this.getScenePath()));
@@ -187,6 +199,7 @@ public class HomepageController implements Initializable {
                 window.show();
             }
         } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Something went wrong her is message: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -270,6 +283,22 @@ public class HomepageController implements Initializable {
 
         // serialize changes
         Serialization.getInstance().serializeData();
+    }
+
+    /*
+     * Changing language of homepage
+     */
+
+    public void changeLanguage(MouseEvent event) {
+        String language = languageComboBox.getSelectionModel().getSelectedItem();
+
+        if (language.equals("SK")) {
+            this.slovakFlag = true;
+        } else {
+            this.slovakFlag = false;
+        }
+
+        this.homeScene(event);
     }
 
     /*
