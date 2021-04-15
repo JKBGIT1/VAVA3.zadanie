@@ -3,6 +3,8 @@ package models;
 import javafx.scene.image.Image;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -73,12 +75,34 @@ public class Room implements Serializable {
         return takenFrom;
     }
 
+    public String getTakenFromString() {
+        // program can display takenFrom date only if room isn't free
+        if (!this.isFree) {
+            // Inspiration from https://www.javatpoint.com/java-date-to-string
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            return dateFormat.format(this.takenFrom);
+        }
+        // if room is free, program display None in TableColumn Taken From
+        return "None";
+    }
+
     public void setTakenFrom(Date takenFrom) {
         this.takenFrom = takenFrom;
     }
 
     public Date getTakenTo() {
         return takenTo;
+    }
+
+    public String getTakenToString() {
+        // program can display takenTo date only if room isn't free
+        if (!this.isFree) {
+            // Inspiration from https://www.javatpoint.com/java-date-to-string
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            return dateFormat.format(this.takenTo);
+        }
+        // if room is free, program display None in TableColumn Taken To
+        return "None";
     }
 
     public void setTakenTo(Date takenTo) {

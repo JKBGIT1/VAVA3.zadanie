@@ -1,6 +1,7 @@
 package controllers.rooms;
 
 import controllers.HomepageController;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -49,10 +50,16 @@ public class DisplayRoomsController extends HomepageController {
         if (this.roomsTableView != null) {
             this.roomLabelCol.setCellValueFactory(new PropertyValueFactory<>("label"));
             this.noteCol.setCellValueFactory(new PropertyValueFactory<>("note"));
-            this.takenFromCol.setCellValueFactory(new PropertyValueFactory<>("takenFrom"));
-            this.takenToCol.setCellValueFactory(new PropertyValueFactory<>("takenTo"));
             this.freeCol.setCellValueFactory(new PropertyValueFactory<>("isFree"));
             this.priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+            // display taken from date and taken to date in readable format thanks to
+            // Room's getTakenFromString() and getTakenToString() methods
+            takenFromCol.setCellValueFactory(
+                    data -> new ReadOnlyStringWrapper(data.getValue().getTakenFromString())
+            );
+            takenToCol.setCellValueFactory(
+                    data -> new ReadOnlyStringWrapper(data.getValue().getTakenToString())
+            );
 
             LOGGER.info("Displaying rooms in roomsTableView.");
             this.roomsTableView.setItems(FXCollections.observableArrayList(this.selectedCategory.getRoomsInCategory()));
