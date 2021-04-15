@@ -33,11 +33,14 @@ public class DetailCustomerController extends HomepageController {
     @FXML
     private TableColumn<Accommodation, Double> priceCol;
 
-
     private final Customer selectedCustomer;
 
     public DetailCustomerController(Customer customer) {
         this.selectedCustomer = customer;
+    }
+
+    public Customer getSelectedCustomer() {
+        return selectedCustomer;
     }
 
     @Override
@@ -73,14 +76,16 @@ public class DetailCustomerController extends HomepageController {
     }
 
     public void accommodationDetail(MouseEvent event) {
+        // if user didn't select accommodation, which he/she wants to display in detail, show error popup
         if (accommodationsTableView.getSelectionModel().getSelectedItem() == null) {
             this.showErrorPopUp(
                     "Select accommodation",
                     "Select accommodation, which you want to display in detail."
             );
         } else {
+            // get selected accommodation from TableView
             Accommodation accommodation = accommodationsTableView.getSelectionModel().getSelectedItem();
-
+            // go to scene, where data about selected accommodation will be displayed in detail
             this.setScenePath(DETAIL_ACCOMMODATION_SCENE);
             this.setController(new DetailAccommodationController(
                     this.selectedCustomer,
@@ -98,7 +103,7 @@ public class DetailCustomerController extends HomepageController {
                     "You have to choose service, which customer wants to use."
             );
         } else {
-            // check if usr is currently accommodated
+            // check if customer is currently accommodated
             if (this.selectedCustomer.getCurrentAccommodation() == null) {
                 this.showErrorPopUp(
                         "Customer isn't accommodated",
@@ -118,7 +123,6 @@ public class DetailCustomerController extends HomepageController {
                         selectedService,
                         new Date(SystemTime.getInstance().getCurrentProgramTime())) // get current time in program
                 );
-
                 // add customer to all customers list with new UsedService
                 Serialization.getInstance().addCustomerAndSerialize(this.selectedCustomer);
                 // refresh table view to display data
@@ -139,11 +143,11 @@ public class DetailCustomerController extends HomepageController {
                     "Select accommodation",
                     "You have to select accommodation for payment."
             );
-
             return;
         }
-
+        // get selected accommodation from TableView for which customer will pay
         Accommodation accommodation = accommodationsTableView.getSelectionModel().getSelectedItem();
+        // get info about payment in cash or other method
         boolean paymentInCast = this.showConfirmationPopUp(
                 "Payment type",
                 "Payment in cash?"

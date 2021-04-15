@@ -18,7 +18,6 @@ public class AddCustomerController extends HomepageController {
     private TextField tfFirstName, tfLastName, tfIdentificationNumber;
 
     public void createCustomer(MouseEvent event) {
-        LOGGER.info("Start of customer creation");
         String firstName = tfFirstName.getText();
         String lastName = tfLastName.getText();
         String identificationNumber = tfIdentificationNumber.getText();
@@ -39,7 +38,6 @@ public class AddCustomerController extends HomepageController {
             this.showSuccessPopUp("Success", "Customer was successfully created");
 
             // switching back to customers scene
-            LOGGER.info("After customer creation switching back to customers scene.");
             this.customersScene(event);
         }
     }

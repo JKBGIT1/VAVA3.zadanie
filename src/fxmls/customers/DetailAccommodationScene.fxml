@@ -111,7 +111,7 @@
                         </VBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#customersScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
+                                <Button mnemonicParsing="false" onMouseClicked="#detailCustomerScene" prefHeight="65.0" prefWidth="175.0" style="-fx-background-color: #dc3545;" text="Back" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>

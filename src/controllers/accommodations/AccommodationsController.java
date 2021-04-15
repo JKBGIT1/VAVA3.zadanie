@@ -27,13 +27,16 @@ public class AccommodationsController extends HomepageController {
     @FXML
     private TableColumn<Customer, String> firstNameCol, lastNameCol, identificationNumberCol;
     @FXML
-    private TableColumn<Customer, String> roomLabelCol, categoryCol, dateToCol, priceCol;
+    private TableColumn<Customer, String> roomLabelCol, categoryCol, dateFromCol, dateToCol, priceCol;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (customersUnpaidAccommodations != null) {
             // get all customers
-            ObservableList<Customer> allCustomers = FXCollections.observableArrayList(Serialization.getInstance().getAllCustomers());
+            ObservableList<Customer> allCustomers = FXCollections.observableArrayList(
+                    Serialization.getInstance().getAllCustomers()
+            );
+            // create blank observable list for customers, who have unpaid accommodations
             ObservableList<Customer> customersWithUnpaidAcc = FXCollections.observableArrayList();
             // get time for this program and convert it to date
             Date currentDate = new Date(SystemTime.getInstance().getCurrentProgramTime());
@@ -43,7 +46,7 @@ public class AccommodationsController extends HomepageController {
             // check if he/she paid for his latter accommodations
             for (Customer customer : allCustomers) {
                 // go through each customer's accommodations
-                for (Accommodation accommodation: customer.getAccommodations()) {
+                for (Accommodation accommodation : customer.getAccommodations()) {
                     // if customer didn't paid for accommodation and it is after accommodation display it in table
                     if (accommodation.getPayment() == null && currentDate.after(accommodation.getDateTo())) {
                         // create customer, who doesn't paid for his accommodation
@@ -74,6 +77,10 @@ public class AccommodationsController extends HomepageController {
                     // display room category for unpaid accommodation in table column Category
                     data -> new ReadOnlyStringWrapper(data.getValue().getCurrentAccommodation().getReservedRoom().getCategory())
             );
+            dateFromCol.setCellValueFactory(
+                    // convert dateFrom into understandable date in String and display it in table column Date From
+                    data -> new ReadOnlyStringWrapper(data.getValue().getCurrentAccommodation().getDateFromAsString())
+            );
             dateToCol.setCellValueFactory(
                     // convert dateTo into understandable date in String and display it in table column Date To
                     data -> new ReadOnlyStringWrapper(data.getValue().getCurrentAccommodation().getDateToAsString())
@@ -86,9 +93,5 @@ public class AccommodationsController extends HomepageController {
             // set customers with unpaid accommodations to tableview
             customersUnpaidAccommodations.setItems(customersWithUnpaidAcc);
         }
-    }
-
-    public void detailUnpaidAccommodation() {
-        LOGGER.info("Switching to detail unpaid accommodation scene");
     }
 }

@@ -1,12 +1,12 @@
 package controllers.customers;
 
-import controllers.HomepageController;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import models.Accommodation;
 import models.Customer;
 import models.Payment;
@@ -44,7 +44,7 @@ public class DetailAccommodationController extends DetailCustomerController {
             servicePriceCol.setCellValueFactory(
                     data -> new ReadOnlyStringWrapper(String.valueOf(data.getValue().getService().getPrice()))
             );
-
+            // display used services for selected accommodation in TableView
             usedServicesTableView.setItems(FXCollections.observableArrayList(this.selectedAccommodation.getUsedServices()));
         }
         // display information about selected accommodation in labels
@@ -76,5 +76,14 @@ public class DetailAccommodationController extends DetailCustomerController {
         } else {
             return this.convertDateToString(payment.getDate());
         }
+    }
+
+    // go back from accommodation detail scene to customer detail scene
+    public void detailCustomerScene(MouseEvent event) {
+        this.setScenePath(DETAIL_CUSTOMER_SCENE);
+        this.setController(new DetailCustomerController(
+                this.getSelectedCustomer()
+        ));
+        this.switchScene(event);
     }
 }

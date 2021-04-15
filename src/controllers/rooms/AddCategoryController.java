@@ -21,19 +21,18 @@ public class AddCategoryController extends HomepageController {
     private TextField tfCategoryName, tfPrice;
 
     public void createRoomCategory(MouseEvent event) {
-        LOGGER.info("Start of new room category creation.");
-
+        // get all needed data from TextFields for RoomCategory creation
         String categoryName = tfCategoryName.getText();
         String priceString = tfPrice.getText();
         String description = taDescription.getText();
 
+        // check if data in TextFields were filled
         if (categoryName.equals("") || priceString.equals("") || description.equals("")) {
             LOGGER.log(Level.WARNING, "User didn't fill all TextFields for category creation");
             this.showErrorPopUp("Missing data", "All text fields need to be filled.");
         } else {
             try {
                 double price = this.convertStringToDouble(priceString);
-                LOGGER.info("Creating room category based on entered data.");
                 // add new room category to all categories observable list
                 Serialization.getInstance().addRoomCategoryAndSerialize(new RoomCategory(
                         categoryName,
@@ -42,7 +41,6 @@ public class AddCategoryController extends HomepageController {
                 ));
                 // show success popup
                 this.showSuccessPopUp("Success", "Room category was successfully created.");
-
                 LOGGER.info("After successful room category creation go back to Room scene.");
                 // after successful creation switch to Room scene
                 this.roomsScene(event);

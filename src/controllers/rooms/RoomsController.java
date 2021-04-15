@@ -28,8 +28,6 @@ public class RoomsController extends HomepageController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.roomCategoryTableView != null) {
-            LOGGER.info("Mapping RoomCategory attributes to roomCategoryTableView columns.");
-
             categoryCol.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
             descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
             priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));

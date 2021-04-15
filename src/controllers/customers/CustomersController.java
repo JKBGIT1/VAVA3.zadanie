@@ -33,13 +33,11 @@ public class CustomersController extends HomepageController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.customersTableView != null) {
-            LOGGER.info("Mapping attributes and methods to customersTableView.");
             // map table columns to customer attributes
             firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             identificationNumberCol.setCellValueFactory(new PropertyValueFactory<>("identificationNumber"));
-
-            // map table columns to customer methods
+            // map table columns to customer's methods
             // inspiration https://stackoverflow.com/questions/25204068/how-do-i-point-a-propertyvaluefactory-to-a-value-of-a-map
             reservationCol.setCellValueFactory(
                     data -> new ReadOnlyStringWrapper(data.getValue().getRoomLabelFromReservation())
@@ -83,12 +81,15 @@ public class CustomersController extends HomepageController {
             this.selectedCustomer.setReservation(null);
             // refresh customers table view to display new data
             customersTableView.refresh();
+            // serialize changed data
+            Serialization.getInstance().serializeData();
+            // log successful info about canceling the reservation
+            LOGGER.info("User successfully canceled reservation.");
             // show success popup
             this.showSuccessPopUp(
                     "Success",
                     "Reservation was successfully canceled."
             );
-            LOGGER.info("User successfully canceled reservation.");
         }
     }
 
@@ -120,11 +121,10 @@ public class CustomersController extends HomepageController {
         // otherwise show error popup
         this.checkCustomerSelection();
         if (this.selectedCustomer != null) {
-            Customer customer = this.customersTableView.getSelectionModel().getSelectedItem();
-
-            LOGGER.info("Switching to Reservation scene");
+            // user selected customer, who wants to make reservation or be accommodated
+            LOGGER.info("Switching to Reservation/Accommodation scene");
             this.setScenePath(RESERVATION_ACCOMMODATION_SCENE);
-            this.setController(new ReservationAccommodationController(customer));
+            this.setController(new ReservationAccommodationController(this.selectedCustomer));
             this.switchScene(event);
         }
     }
@@ -143,7 +143,6 @@ public class CustomersController extends HomepageController {
                         "No reservation",
                         "Selected customer doesn't have reservation."
                 );
-
                 return;
             }
 
@@ -156,7 +155,8 @@ public class CustomersController extends HomepageController {
                     reservation.getPrice(),
                     reservation.getReservedRoom()
             );
-
+            // add newly created accommodation to room's history of accommodations
+            reservation.getReservedRoom().getHistoryAccommodations().add(accommodation);
             // set newly created accommodation to customer's currentAccommodation
             this.selectedCustomer.setCurrentAccommodation(accommodation);
             // add newly created accommodation to accommodations history
@@ -165,6 +165,8 @@ public class CustomersController extends HomepageController {
             this.selectedCustomer.setReservation(null);
             // refresh customers table view to display new data
             customersTableView.refresh();
+            // serialize changed data
+            Serialization.getInstance().serializeData();
             LOGGER.info("Accommodation was successfully created based on selectedCustomer's reservation");
             this.showSuccessPopUp(
                     "Success",

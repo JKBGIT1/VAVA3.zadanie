@@ -4,6 +4,7 @@ import controllers.accommodations.AccommodationsController;
 import controllers.customers.CustomersController;
 import controllers.rooms.RoomsController;
 import controllers.services.ServicesController;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -234,19 +235,23 @@ public class HomepageController implements Initializable {
      * Mapping attributes to columns in TableView
      */
 
-    public void mapCustomers(
+    public void mapRooms(
         TableColumn<Room, String> roomLabel,
         TableColumn<Room, String> categoryCol,
         TableColumn<Room, Double> priceCol,
-        TableColumn<Room, Date> dateFromCol,
-        TableColumn<Room, Date> dateToCol,
+        TableColumn<Room, String> dateFromCol,
+        TableColumn<Room, String> dateToCol,
         TableColumn<Room, Boolean> freeCol
     ) {
         roomLabel.setCellValueFactory(new PropertyValueFactory<>("label"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        dateFromCol.setCellValueFactory(new PropertyValueFactory<>("dateFrom"));
-        dateToCol.setCellValueFactory(new PropertyValueFactory<>("dateTo"));
+        dateFromCol.setCellValueFactory(
+                data -> new ReadOnlyStringWrapper(data.getValue().getTakenFromString())
+        );
+        dateToCol.setCellValueFactory(
+                data -> new ReadOnlyStringWrapper(data.getValue().getTakenToString())
+        );
         freeCol.setCellValueFactory(new PropertyValueFactory<>("isFree"));
     }
 

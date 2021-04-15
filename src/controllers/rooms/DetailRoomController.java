@@ -1,5 +1,6 @@
 package controllers.rooms;
 
+import design_patterns.Serialization;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +15,6 @@ import models.Room;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DetailRoomController extends RoomsController {
@@ -91,7 +91,11 @@ public class DetailRoomController extends RoomsController {
     }
 
     public void editRoomNotes() {
+        // change room notes
         this.selectedRoom.setNote(taRoomNotes.getText());
+        // serialize changes of room notes
+        Serialization.getInstance().serializeData();
+        // show success popup
         this.showSuccessPopUp("Success", "Room note was successfully changed.");
     }
 }

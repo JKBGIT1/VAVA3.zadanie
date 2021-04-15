@@ -75,6 +75,7 @@ public class AddRoomController extends HomepageController {
     }
 
     public void removeImage() {
+        // check if user selected image, which he/she wants to remove from room gallery
         if (this.imagesListView.getSelectionModel().getSelectedItems() == null) {
             this.showErrorPopUp(
                     "Select image",
@@ -113,7 +114,10 @@ public class AddRoomController extends HomepageController {
                 byte[] fileBytes = Files.readAllBytes(file.toPath());
                 // get list index of this byte array and store it under this index into hashmap
                 String index = String.valueOf(this.uploadedImagesText.size());
+                // store byte array of image under String index in hashmap
                 this.stringImageHashMap.put(index, fileBytes);
+                // add image index to uploadedImagesText observable list
+                // because program will be displaying images based on indexes in this list
                 this.uploadedImagesText.add(index);
                 LOGGER.info("Image was uploaded.");
                 return;
@@ -128,12 +132,12 @@ public class AddRoomController extends HomepageController {
 
     public void createRoom(MouseEvent event) {
         String roomLabel = tfRoomLabel.getText();
-
+        // check if user filled room label
         if (roomLabel.equals("")) {
             LOGGER.info("User didn't enter room label.");
             this.showErrorPopUp("Enter Label", "Each room has to have label.");
         } else {
-            // check if room label doesn't exists
+            // check if room label doesn't exists in this category
             for (Room room: this.selectedCategory.getRoomsInCategory()) {
                 if (roomLabel.equals(room.getLabel())) {
                     LOGGER.info("User entered room label, which already exists.");
@@ -146,11 +150,11 @@ public class AddRoomController extends HomepageController {
             }
 
             ArrayList<byte[]> roomGallery = new ArrayList<>();
-            // create arraylist of images as a room gallery
+            // create arraylist of byte arrays, which will be converted in images
+            // these byte arrays works as a room gallery
             for (String index : this.uploadedImagesText) {
                 roomGallery.add(this.stringImageHashMap.get(index));
             }
-
             // add newly create room in category
             selectedCategory.getRoomsInCategory().add(new Room(
                     roomLabel,

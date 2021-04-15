@@ -29,7 +29,7 @@ public class ReservationAccommodationController extends HomepageController {
     @FXML
     private TableColumn<Room, Double> priceCol;
     @FXML
-    private TableColumn<Room, Date> takenFromCol, takenToCol;
+    private TableColumn<Room, String> takenFromCol, takenToCol;
     @FXML
     private TableColumn<Room, Boolean> freeCol;
     @FXML
@@ -44,9 +44,11 @@ public class ReservationAccommodationController extends HomepageController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (roomsTableView != null) {
-            mapCustomers(roomLabelCol, categoryCol, priceCol, takenFromCol, takenToCol, freeCol);
-
+            // map columns in table to room attributes and methods
+            mapRooms(roomLabelCol, categoryCol, priceCol, takenFromCol, takenToCol, freeCol);
+            // create observable list for all rooms, which will be displayed in roomsTableView
             ObservableList<Room> rooms = FXCollections.observableArrayList();
+            // get observable list of all room categories in hotel
             ObservableList<RoomCategory> roomsCategory = Serialization.getInstance().getAllCategories();
 
             // get all rooms from each category and add them to rooms observable list
@@ -59,15 +61,16 @@ public class ReservationAccommodationController extends HomepageController {
         }
     }
 
+    // when user click on Reserve button, this method will make a Reservation
     public void makeReservation(MouseEvent event) {
         this.makeAccommodationOrReservation(event, true);
     }
 
-    public void makeAccommodation(MouseEvent event) {
-        this.makeAccommodationOrReservation(event, false);
-    }
+    // when user click on Accommodate button, this method will make an Accommodation
+    public void makeAccommodation(MouseEvent event) { this.makeAccommodationOrReservation(event, false); }
 
     public void makeAccommodationOrReservation(MouseEvent event, boolean reservationFlag) {
+        // if user didn't select any room for accommodation or reservation show error popup
         if (roomsTableView.getSelectionModel().getSelectedItem() == null) {
             LOGGER.info("User didn't selected any room for reservation or accommodation process.");
             this.showErrorPopUp(
@@ -75,14 +78,15 @@ public class ReservationAccommodationController extends HomepageController {
                     "You have to select room, before reservation or accommodation."
             );
         } else {
+            // get selected room from TableView
             Room selectedRoom = roomsTableView.getSelectionModel().getSelectedItem();
             // check if room isn't occupied
             if (!this.checkIfRoomIsFree(selectedRoom)) {
                 return;
             }
 
-            LOGGER.info("Checking if dates were filled and are right.");
             try {
+                // get entered dates from TextFields
                 String dateFromString = tfDateFrom.getText();
                 String dateToString = tfDateTo.getText();
 
@@ -197,6 +201,8 @@ public class ReservationAccommodationController extends HomepageController {
         // set reservation to selected customer
         LOGGER.info("Reservation was created.");
         this.selectedCustomer.setReservation(reservation);
+        // serialize changed data
+        Serialization.getInstance().serializeData();
         this.showSuccessPopUp(
                 "Success",
                 "Reservation was successfully created."
@@ -217,7 +223,7 @@ public class ReservationAccommodationController extends HomepageController {
         String dateFromFormatted = formatter.format(dateFrom);
         String dateToFormatted = formatter.format(dateTo);
 
-        // create reservation only if user confirms it
+        // create accommodation only if user confirms it
         if (!this.showConfirmationPopUp(
                 "Confirm accommodation from " + dateFromFormatted + " to " + dateToFormatted,
                 "Do you want to confirm accommodation with discount " + priceWithDiscount +
@@ -229,7 +235,7 @@ public class ReservationAccommodationController extends HomepageController {
 
         // Change room status from free to occupied and set start of accommodation and end of accommodation
         this.changeRoomData(selectedRoom, dateFrom, dateTo);
-        // create new reservation
+        // create new accommodation
         Accommodation accommodation = new Accommodation(
                 dateFrom,
                 dateTo,
@@ -238,21 +244,14 @@ public class ReservationAccommodationController extends HomepageController {
         );
         // add accommodation to history of all accommodation for room
         selectedRoom.getHistoryAccommodations().add(accommodation);
-        // set accommodation to selected customer
-        LOGGER.info("Reservation was created.");
-
+        // remove selected customer from all customers observable list
         Serialization.getInstance().getAllCustomers().remove(this.selectedCustomer);
-
         // set current accommodation to selected customer
         this.selectedCustomer.setCurrentAccommodation(accommodation);
         // add newly created accommodation to customer's history of accommodations
         this.selectedCustomer.getAccommodations().add(accommodation);
-
+        // serialize selectedCustomer with changed data
         Serialization.getInstance().addCustomerAndSerialize(this.selectedCustomer);
-
-
-
-
         this.showSuccessPopUp(
                 "Success",
                 "Accommodation was successfully created."
