@@ -100,7 +100,6 @@ public class Serialization {
     }
 
     public void serializeData() {
-        // get serialized data from /booking_data.ser
         try (FileOutputStream fileOut = new FileOutputStream("booking_data.ser");
              ObjectOutputStream out = new ObjectOutputStream(fileOut);)
         {

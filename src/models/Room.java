@@ -1,7 +1,5 @@
 package models;
 
-import javafx.scene.image.Image;
-
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
